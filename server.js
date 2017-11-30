@@ -9,6 +9,8 @@ var PORT = process.env.PORT || 3000;
 // view = show me the burger ui
 
 var app = express();
+
+// Static directory
 app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -19,7 +21,7 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-var routes = require("./controllers/routes.js");
+var routes = require("./routes/routes.js");
 app.use("/", routes);
 
 app.listen(PORT, function() {
