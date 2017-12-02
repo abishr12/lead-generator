@@ -19,7 +19,7 @@ router.get("/search/:email", function(req, res) {
 router.get("/search/:email", function(req, res) {
   console.log("Target Data:");
   console.log(req.body);
-  Target.create({
+  db.Target.create({
     name: req.body.target.name,
     email: req.body.target.email,
     employmentCompany: req.body.target.employmentCompany,
@@ -38,7 +38,7 @@ router.get("/search/:email", function(req, res) {
 router.get("/search/:email", function(req, res) {
   console.log("Company Data:");
   console.log(req.body);
-  Company.create({
+  db.Company.create({
     companyName: req.body.company.companyName,
     companyFounded: req.body.company.companyFounded,
     companyURL: req.body.company.companyURL,
@@ -56,7 +56,7 @@ router.get("/search/:email", function(req, res) {
   });
 });
 router.get("/search/:email", function(req, res) {
-  CompanyEmail.create({
+  db.CompanyEmail.create({
     email: req.body.company.companyEmails,
     companyName: req.body.company.companyName
   }).catch(function(err) {
