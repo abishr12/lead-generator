@@ -3,6 +3,7 @@ var router = express.Router();
 var clearbitSearch = require("../utils/clearbit-search");
 var targetCreate = require("../utils/target-create");
 var companyCreate = require("../utils/company-create");
+var companyEmailCreate = require("../utils/companyEmail-create");
 
 router.get("/", function(req, res) {
   res.render("index", req.body);
@@ -15,8 +16,9 @@ router.get("/search/:email", function(req, res) {
 
   clearbitSearch(email, function(data) {
     res.json(data);
-    targetCreate(data);
     companyCreate(data);
+    targetCreate(data);
+    companyEmailCreate(data);
   });
 });
 
