@@ -8,6 +8,17 @@
 //   slideout.toggle();
 // });
 $(document).ready(function(e){
+  $("#searchBtn").on("click", function(event) {
+    event.preventDefault();
+    console.log("working");
+    var emailSearch = $("#searchField").val().trim();
+    var url = "/search/" + emailSearch
+    console.log(url)
+    $.get(url).done(function(data) {
+      console.log(data)
+
+    })
+  })
   console.log("yo");
   $(".toggle").click(function() {
     // $('.').toggleClass('transform-active');
