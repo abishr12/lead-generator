@@ -47,22 +47,22 @@ models.sequelize.sync().then(function () {
 
 #### .env file
 
-If it's cool with you, I'd like to move all of the secret keys and DB info to the [dotenv](#) package. This way we can reference private data much like the port is accessed through `process.env`. rather than a keys file. I am not using it yet, but you can see that I am referencing the file at the top of [server.js](#).
+If it's cool with you, I'd like to move all of the secret keys and DB info to the [dotenv](https://www.npmjs.com/package/dotenv) package. This way we can reference private data much like the port is accessed through `process.env`. rather than a keys file. I am not using it yet, but you can see that I am referencing the file at the top of [server.js](https://github.com/abishr12/lead-generator/blob/b9406a17ebca1043b0f033f96c756a20eaa444f4/server.js#L1).
 
 ### User Authentication
 
 #### Passport.js
 
-[Passport.js](http://www.passportjs.org/) library to handle user authentication. The logic is stored in the [config](#) directory. This file holds the [logic for creating new users](#), [encrypting their passwords](#) using the [bcrypt](#) package, [signing in existing users](#) and validating passwords, also using bcrypt.
+[Passport.js](http://www.passportjs.org/) library to handle user authentication. The logic is stored in the [config](https://github.com/abishr12/lead-generator/blob/auth/config/passport/passport.js) directory. This file holds the [logic for creating new users](https://github.com/abishr12/lead-generator/blob/b9406a17ebca1043b0f033f96c756a20eaa444f4/config/passport/passport.js#L9), [encrypting their passwords](https://github.com/abishr12/lead-generator/blob/b9406a17ebca1043b0f033f96c756a20eaa444f4/config/passport/passport.js#L19) using the [bcrypt](https://www.npmjs.com/package/bcrypt) package, [signing in existing users](https://github.com/abishr12/lead-generator/blob/b9406a17ebca1043b0f033f96c756a20eaa444f4/config/passport/passport.js#L54) and validating passwords, also using bcrypt.
 
 
 #### User Model
 
-- Added [User model](#) to handle logic for creating and signing in users. The User model contains an ID (primary key), first and last name, email (the username), password, last login, and logged in/out status. This data is saved in a `users` table in the `lead_generator` database.
+- Added [User model](https://github.com/abishr12/lead-generator/blob/auth/models/users.js) to handle logic for creating and signing in users. The User model contains an ID (primary key), first and last name, email (the username), password, last login, and logged in/out status. This data is saved in a `users` table in the `lead_generator` database.
 
 #### Auth Controller
 
-- [./controllers/authctrl](#) basically a set of methods that are exported that handle sign-up, sign-in, detecting if a user is signed-in, and logout.
+- [./controllers/authctrl](https://github.com/abishr12/lead-generator/blob/auth/controllers/authctrl.js) basically a set of methods that are exported that handle sign-up, sign-in, detecting if a user is signed-in, and logout.
 
 #### Auth Routes
 
