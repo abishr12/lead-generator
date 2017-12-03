@@ -17,8 +17,11 @@ router.get("/search/:email", function(req, res) {
   clearbitSearch(email, function(data) {
     res.json(data);
     companyCreate(data);
+    // companyCreate(data, function(result) {
+    //   companyEmailCreate(data, result);
+    // });
     targetCreate(data);
-    companyEmailCreate(data);
+    //companyEmailCreate(data);
   });
 });
 
