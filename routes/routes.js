@@ -2,6 +2,13 @@ var express = require("express");
 var router = express.Router();
 var clearbitSearch = require("../utils/clearbit-search.js");
 
+// Require auth controller and passport.js module
+const authctrl = require('../controllers/authctrl.js');
+const passport = require('passport');
+
+// Requre models to have access to User moddle
+var models = require("../models");
+
 router.get("/", function(req, res) {
   res.render("index", req.body);
 });
@@ -65,5 +72,34 @@ router.get("/search/:email", function(req, res) {
     res.json(err);
   });
 });
+
+
+// ROUTES FOR USER AUTH
+router.get('/signup', authctrl.signup);
+router.get('/signin', authctrl.signin);
+router.get('/logout', authctrl.logout);
+router.get('/dashboard', isLoggedIn, authctrl.dashboard);
+
+// Load passport strategies from config
+require('../config/passport/passport.js')(passport, models.user);
+
+router.post('/signup', passport.authenticate('local-signup', {
+  successRedirect: '/dashboard',
+  failureRedirect: '/signup'
+}));
+
+router.post('/signin', passport.authenticate('local-signin', {
+  successRedirect: '/dashboard',
+  failureRedirect: '/signin'
+}
+
+));
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/signin');
+}
 
 module.exports = router;
