@@ -42,9 +42,12 @@ var clearbitSearch = (emailsToSearch, callback) => {
       callback(data);
     })
     .catch(err => {
-      if (err.name === "TypeError") {
-        console.log("Error for " + email);
-      }
+      // if (err.name === "TypeError") {
+      //   console.log("Error for " + email);
+      // }
+      // if (err.name === "ClearbitError") {
+      //   console.log("Error for " + email);
+      // }
       throw err;
     });
 };

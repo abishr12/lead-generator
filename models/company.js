@@ -18,5 +18,14 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: "cascade"
     });
   };
+
+  Company.associate = function(models) {
+    // Associating Company with CompanyEmail
+    // When an Company is deleted, also delete any associated Posts
+    Company.hasMany(models.Target, {
+      onDelete: "cascade"
+    });
+  };
+
   return Company;
 };
