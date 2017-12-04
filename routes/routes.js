@@ -29,11 +29,11 @@ router.get("/api/savedsearch/:email", (req, res) => {
           where: { companyId: responseOne.CompanyId }
         }).then(responseThree => {
           companyEmailsList = [];
-          for (var i = 0; i < responseThree.length; i++) {
+          for (let i = 0; i < responseThree.length; i++) {
             companyEmailsList.push(responseThree[i].dataValues.email);
           }
-          //console.log(companyEmailsList);
-          const resObject = {
+
+          let resObject = {
             target: responseOne,
             company: responseTwo.dataValues,
             companyEmails: companyEmailsList
