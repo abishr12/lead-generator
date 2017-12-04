@@ -1,19 +1,28 @@
 module.exports = function(sequelize, DataTypes) {
-  var burger = sequelize.define(
-    "Burger",
-    {
-      burger_name: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      devoured: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
-      }
-    },
-    {
-      timestamps: false
+  var Target = sequelize.define("Target", {
+    name: DataTypes.STRING,
+    email: DataTypes.STRING,
+    employmentCompany: DataTypes.STRING,
+    employmentTitle: DataTypes.STRING,
+    linkedInURL: DataTypes.STRING,
+    twitterHandle: DataTypes.STRING,
+    location: DataTypes.STRING,
+    biography: DataTypes.STRING,
+    saved: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
-  );
-  return burger;
+  });
+
+  // Foreign Key
+  Target.associate = function(models) {
+    // We're saying that a Post should belong to an Author
+    // A Post can't be created without an Author due to the foreign key constraint
+    Target.belongsTo(models.Company, {
+      foreignKey: {
+        allowNull: true
+      }
+    });
+  };
+  return Target;
 };

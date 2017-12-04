@@ -9,6 +9,9 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 
+// Requiring our models for syncing
+var db = require("./models");
+
 // Static directory
 app.use(express.static("public"));
 
@@ -33,6 +36,7 @@ app.set("view engine", "handlebars");
 const routes = require("./routes/routes.js");
 app.use("/", routes);
 
+
 models.sequelize.sync().then(function () {
 
   console.log('Nice! Database looks fine');
@@ -47,3 +51,4 @@ models.sequelize.sync().then(function () {
 }).catch(function (err) {
   console.log(err, "Something went wrong with the Database Update!");
 });
+
