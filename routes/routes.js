@@ -20,22 +20,22 @@ router.get("/api/savedsearch/:email", (req, res) => {
   savedEmail = req.params.email;
 
   //Find email related to target
-  db.Target.findOne({ where: { email: savedEmail } }).then(responseOne => {
+  db.Target.findOne({ where: { email: savedEmail } }).then(targetData => {
     //Find the company the target works for
-    db.Company.findOne({ where: { id: responseOne.CompanyId } }).then(
-      responseTwo => {
+    db.Company.findOne({ where: { id: targetData.CompanyId } }).then(
+      companyData => {
         //See all company emails for that specific company
         db.CompanyEmail.findAll({
-          where: { companyId: responseOne.CompanyId }
-        }).then(responseThree => {
+          where: { companyId: targetData.CompanyId }
+        }).then(companyEmailData => {
           companyEmailsList = [];
-          for (let i = 0; i < responseThree.length; i++) {
-            companyEmailsList.push(responseThree[i].dataValues.email);
+          for (let i = 0; i < companyEmailData.length; i++) {
+            companyEmailsList.push(companyEmailData[i].dataValues.email);
           }
 
           let resObject = {
-            target: responseOne,
-            company: responseTwo.dataValues,
+            target: targetData,
+            company: companyData.dataValues,
             companyEmails: companyEmailsList
           };
           res.json(resObject);
