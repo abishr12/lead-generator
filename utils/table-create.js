@@ -1,5 +1,7 @@
+//Import sequelize models
 var db = require("../models/index.js");
 
+//Create Sequelize tables
 const tableCreate = data => {
   //Creating Company Table
   db.Company.findOrCreate({

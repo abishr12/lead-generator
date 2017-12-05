@@ -9,33 +9,34 @@ var db = require("../models/index.js");
 const authctrl = require("../controllers/authctrl.js");
 const passport = require("passport");
 
-// Requre models to have access to User moddle
+// Requre models to have access to User module
 var models = require("../models");
 
 router.get("/", function(req, res) {
   res.render("index", req.body);
 });
 
+//API for saved emails search
 router.get("/api/savedsearch/:email", (req, res) => {
   savedEmail = req.params.email;
 
   //Find email related to target
-  db.Target.findOne({ where: { email: savedEmail } }).then(responseOne => {
+  db.Target.findOne({ where: { email: savedEmail } }).then(targetData => {
     //Find the company the target works for
-    db.Company.findOne({ where: { id: responseOne.CompanyId } }).then(
-      responseTwo => {
+    db.Company.findOne({ where: { id: targetData.CompanyId } }).then(
+      companyData => {
         //See all company emails for that specific company
         db.CompanyEmail.findAll({
-          where: { companyId: responseOne.CompanyId }
-        }).then(responseThree => {
+          where: { companyId: targetData.CompanyId }
+        }).then(companyEmailData => {
           companyEmailsList = [];
-          for (let i = 0; i < responseThree.length; i++) {
-            companyEmailsList.push(responseThree[i].dataValues.email);
+          for (let i = 0; i < companyEmailData.length; i++) {
+            companyEmailsList.push(companyEmailData[i].dataValues.email);
           }
 
           let resObject = {
-            target: responseOne,
-            company: responseTwo.dataValues,
+            target: targetData,
+            company: companyData.dataValues,
             companyEmails: companyEmailsList
           };
           res.json(resObject);
@@ -45,9 +46,8 @@ router.get("/api/savedsearch/:email", (req, res) => {
   });
 });
 
+//Clearbit API search
 router.get("/api/search/:email", (req, res) => {
-  // console.log(req.body.email);
-
   emailSearch = req.params.email;
 
   if (validateEmail(emailSearch)) {
@@ -60,9 +60,8 @@ router.get("/api/search/:email", (req, res) => {
   }
 });
 
+//Save the email to be searched stored in the database
 router.put("/api/save/:email", (req, res) => {
-  // Update takes in an object describing the properties we want to update, and
-  // we use where to describe which objects we want to update
   let emailSaved = req.params.email;
   db.Target.update(
     {
