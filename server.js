@@ -1,7 +1,7 @@
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
-const passport = require('passport');
-const session = require('express-session');
+const passport = require("passport");
+const session = require("express-session");
 const bodyParser = require("body-parser");
 const models = require("./models");
 const methodOverride = require("method-override");
@@ -19,14 +19,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // For Passport
-app.use(session({
-  secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: true
-})); // session secret
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: true,
+    saveUninitialized: true
+  })
+); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
+//Using handlebars
 app.use(methodOverride("_method"));
 const exphbs = require("express-handlebars");
 
@@ -36,19 +39,19 @@ app.set("view engine", "handlebars");
 const routes = require("./routes/routes.js");
 app.use("/", routes);
 
+//Creating sequelize database
+models.sequelize
+  .sync()
+  .then(function() {
+    console.log("Nice! Database looks fine");
+    app.listen(PORT, function(error) {
+      if (error) {
+        throw Error(error);
+      }
 
-models.sequelize.sync().then(function () {
-
-  console.log('Nice! Database looks fine');
-  app.listen(PORT, function (error) {
-    if (error) {
-      throw Error(error);
-    }
-
-    console.log("Running @:", "http://localhost:" + PORT);
+      console.log("Running @:", "http://localhost:" + PORT);
+    });
+  })
+  .catch(function(err) {
+    console.log(err, "Something went wrong with the Database Update!");
   });
-
-}).catch(function (err) {
-  console.log(err, "Something went wrong with the Database Update!");
-});
-
