@@ -84,6 +84,7 @@ router.put("/api/save/:email", (req, res) => {
 // ROUTES FOR USER AUTH
 router.get("/signup", authctrl.signup);
 router.get("/signin", authctrl.signin);
+router.get("/login", authctrl.login);
 router.get("/logout", authctrl.logout);
 router.get("/dashboard", isLoggedIn, authctrl.dashboard);
 
