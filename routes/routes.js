@@ -9,13 +9,14 @@ var db = require("../models/index.js");
 const authctrl = require("../controllers/authctrl.js");
 const passport = require("passport");
 
-// Requre models to have access to User moddle
+// Requre models to have access to User module
 var models = require("../models");
 
 router.get("/", function(req, res) {
   res.render("index", req.body);
 });
 
+//API for saved emails search
 router.get("/api/savedsearch/:email", (req, res) => {
   savedEmail = req.params.email;
 
@@ -45,9 +46,8 @@ router.get("/api/savedsearch/:email", (req, res) => {
   });
 });
 
+//Clearbit API search
 router.get("/api/search/:email", (req, res) => {
-  // console.log(req.body.email);
-
   emailSearch = req.params.email;
 
   if (validateEmail(emailSearch)) {
@@ -60,9 +60,8 @@ router.get("/api/search/:email", (req, res) => {
   }
 });
 
+//Save the email to be searched stored in the database
 router.put("/api/save/:email", (req, res) => {
-  // Update takes in an object describing the properties we want to update, and
-  // we use where to describe which objects we want to update
   let emailSaved = req.params.email;
   db.Target.update(
     {
