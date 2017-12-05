@@ -16,7 +16,6 @@ $(document).ready(function(e){
     console.log(url)
     $.get(url).done(function(data) {
       console.log(data)
-
     })
   })
   console.log("yo");
@@ -26,4 +25,8 @@ $(document).ready(function(e){
     // $("div.four").toggleClass("hide")
     // $("div.input-group").toggleClass("remove")
   });
+
+  // if (err) {
+  //   alert("incorrect response")
+  // };
 })

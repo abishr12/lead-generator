@@ -1,6 +1,10 @@
 body {
   background-color: #DCE0E2 !important;
 }
+.navbar-brand {
+  display: block;
+  margin-right: 5px;
+}
 .three {
   background-color: red;
   height: 100%;
@@ -49,7 +53,9 @@ body {
 }
 img {
   color: white;
+  display: block;
   /*color: #FFDFC1;*/
+  position: relative;
 }
 button {
   background-color: #143665 !important;
@@ -57,9 +63,15 @@ button {
   color: white !important;
   border-radius: 5px !important;
 }
-.searchbar {
-  margin-top: 5.5%;
-  margin-bottom: 5.5%;
+.navbar-header {
+  /*margin-top: 200px !important;*/
+  /*display: block !important;*/
+  /*height: 200px !important;*/
+  /*position: absolute;*/
+}
+.searchBox {
+  position: relative;
+  margin-left: 70% !important;
 }
 /*.toggle {
   margin-left: 12px;
