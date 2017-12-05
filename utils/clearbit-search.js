@@ -22,7 +22,7 @@ var clearbitSearch = (emailsToSearch, callback) => {
       person.employmentTitle = target.employment.title;
       person.linkedInURL = "https:www.linkedin.com/" + target.linkedin.handle;
 
-      person.twitterHandle = "@" + target.twitter.handle;
+      person.twitterHandle = target.twitter.handle;
       person.location = target.location;
       person.biography = target.bio;
 
@@ -42,9 +42,12 @@ var clearbitSearch = (emailsToSearch, callback) => {
       callback(data);
     })
     .catch(err => {
-      if (err.name === "TypeError") {
-        console.log("Error for " + email);
-      }
+      // if (err.name === "TypeError") {
+      //   console.log("Error for " + email);
+      // }
+      // if (err.name === "ClearbitError") {
+      //   console.log("Error for " + email);
+      // }
       throw err;
     });
 };
