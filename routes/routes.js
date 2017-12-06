@@ -12,10 +12,6 @@ const passport = require("passport");
 // Requre models to have access to User module
 var models = require("../models");
 
-router.get("/", function(req, res) {
-  res.render("index", req.body);
-});
-
 //API for saved emails search
 router.get("/api/savedsearch/:email", (req, res) => {
   savedEmail = req.params.email;
@@ -82,9 +78,10 @@ router.put("/api/save/:email", (req, res) => {
 });
 
 // ROUTES FOR USER AUTH
+router.get("/", authctrl.login);
+router.get("/login", authctrl.login);
 router.get("/signup", authctrl.signup);
 router.get("/signin", authctrl.signin);
-router.get("/login", authctrl.login);
 router.get("/logout", authctrl.logout);
 router.get("/dashboard", isLoggedIn, authctrl.dashboard);
 

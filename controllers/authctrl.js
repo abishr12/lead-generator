@@ -9,15 +9,18 @@ module.exports.signin = function (req, res) {
 module.exports.dashboard = function (req, res) {
 	let user_info = req.user
 	console.log(user_info);
-	res.render('index', {
+	res.render('dashboard', {
 		user_id: user_info.id,
 		first_name: user_info.firstname,
-		last_name: user_info.lastname
+		last_name: user_info.lastname,
+		dashboard:true
 	});
 };
 
 module.exports.login = function (req, res) {
-	res.render('login');
+	res.render('login', {
+		login_page:true
+	});
 };
 
 module.exports.logout = function (req, res) {
