@@ -5,6 +5,7 @@ var clearbit = require("clearbit")(key.apiKey);
 var clearbitSearch = (emailsToSearch, callback) => {
   clearbit.Enrichment.find({ email: emailsToSearch, stream: true })
     .then(response => {
+      //JSON object
       const data = {
         target: {},
         company: {}
@@ -42,12 +43,6 @@ var clearbitSearch = (emailsToSearch, callback) => {
       callback(data);
     })
     .catch(err => {
-      // if (err.name === "TypeError") {
-      //   console.log("Error for " + email);
-      // }
-      // if (err.name === "ClearbitError") {
-      //   console.log("Error for " + email);
-      // }
       throw err;
     });
 };
