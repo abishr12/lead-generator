@@ -2,3 +2,4 @@ node_modules
 keys.js
 .DS_Store
 views/layouts/bs.html
+views/layouts/pf.html
