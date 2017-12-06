@@ -1,86 +1,23 @@
+<table>
+    {{#each target}}
+    <tr>
+      <td>{{target.name}}</td>
+      <td>{{target.email}}</td>
+      <td>{{target.employmentCompany}}</td>
+      <td>{{target.employmentTitle}}</td>
+      <td>{{target.linkedInURL}}</td>
+      <td>{{target.twitterHandle}}</td>
+      <td>{{target.location}}</td>
+      <td>{{target.biography}}</td>
+    </tr>
+    {{/each}}
 
-
-  <nav class="navbar navbar-default">
-<div class="container-fluid">
-  <div class="navbar-header">
-    <a class="navbar-brand" href="#">
-      <img alt="LogDNA">
-    </a>
-  </div>
-</div>
-  </nav>
-  <div class="row">
-    <div class="box col-md-4">
-      <div class="row">
-        <div class=" two col-md-12">
-           <div class="searchbar col-lg-12">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <button class="btn btn-default" id="searchBtn" type="button">Search!</button>
-              </span>
-              <input type="text" id="searchField" class="form-control" placeholder="Email Address">
-            </div>
-          </div>
-          <div class="searchbar col-lg-12">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Add!</button>
-              </span>
-              <input type="text" class="form-control" placeholder="Email Adress">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class=" four col-md-12">
-          <br>
-        Emails display here when added to the list.
-        <br>
-        <br>
-        donny.vallejo@gmail.com
-        <br>
-        someguy@gmail.com
-        <br>
-        somecompany@gmail.com
-        <br>
-        whatevz@gmail.com
-        <br>
-        </div>
-      </div>
-    </div>
-    <div class="one col-md-8">
-      <div class="row">
-          <button class="toggle" type="button" name="toggle">☰</button>
-          <p>this button opens and closes the left container</p>
-      </div>
-      <br>
-      <br>
-      <p>contact information for each email adress is displayed here</p>
-      <table>
-        <tr>
-          {{#each target}}
-          <p>{{#target.name}}</p>
-          <p>{{#target.email}}</p>
-          <p>{{#target.employmentCompany}}</p>
-          <p>{{#target.employmentTitle}}</p>
-          <p>{{#target.linkedInURL}}</p>
-          <p>{{#target.twitterHandle}}</p>
-          <p>{{#target.location}}</p>
-          <p>{{#target.biography}}</p>
-          {{#each}}
-        </tr>
-        <tr>
-          {{#each company}}
-          <p>{{#company.companyName}}</p>
-          <p>{{#company.companyFounded}}</p>
-          <p>{{#company.companyURL}}</p>
-          <p>{{#company.companyBio}}</p>
-          {{#each}}
-        </tr>
-        <tr>
-          {{#each companyEmail}}
-          {{#each}}
-        </tr>
-      </table>
-    </div>
-</div>
+    {{#each company}}
+      <tr>
+        <td>{{company.companyName}}</td>
+        <td>{{company.companyFounded}}</td>
+        <td>{{company.companyURL}}</td>
+        <td>{{company.companyBio}}</td>
+      </tr>
+    {{/each}}
+</table>

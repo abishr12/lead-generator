@@ -33,7 +33,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(methodOverride("_method"));
 const exphbs = require("express-handlebars");
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({ defaultLayout: "admin" }));
 app.set("view engine", "handlebars");
 
 const routes = require("./routes/routes.js");
