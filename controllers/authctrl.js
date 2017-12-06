@@ -7,7 +7,13 @@ module.exports.signin = function (req, res) {
 };
 
 module.exports.dashboard = function (req, res) {
-	res.render('dashboard');
+	let user_info = req.user
+	console.log(user_info);
+	res.render('index', {
+		user_id: user_info.id,
+		first_name: user_info.firstname,
+		last_name: user_info.lastname
+	});
 };
 
 module.exports.login = function (req, res) {
@@ -16,6 +22,6 @@ module.exports.login = function (req, res) {
 
 module.exports.logout = function (req, res) {
 	req.session.destroy(function (err) {
-		res.redirect('/signin');
+		res.redirect('/login');
 	});
 };
