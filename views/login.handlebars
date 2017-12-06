@@ -21,33 +21,33 @@
 				<form class="forms_form" id="signin" name="signin" method="post" action="signin">
 					<fieldset class="forms_fieldset">
 						<div class="forms_field">
-							<input type="email" placeholder="Email" class="forms_field-input" required autofocus />
+							<input type="text" name="email" placeholder="Email" class="forms_field-input" required autofocus />
 						</div>
 						<div class="forms_field">
-							<input type="password" placeholder="Password" class="forms_field-input" required />
+							<input name="password" type="password" placeholder="Password" class="forms_field-input" required />
 						</div>
 					</fieldset>
 					<div class="forms_buttons">
-						<button type="button" class="forms_buttons-forgot">Forgot password?</button>
 						<input type="submit" value="Log In" class="forms_buttons-action">
 					</div>
 				</form>
+
 			</div>
 			<div class="user_forms-signup">
 				<h2 class="forms_title">Sign Up</h2>
 				<form class="forms_form" id="signup" name="signup" method="post" action="/signup">
 					<fieldset class="forms_fieldset">
 						<div class="forms_field">
-							<input type="text" placeholder="First Name" class="forms_field-input" required />
+							<input type="text" name="firstname" placeholder="First Name" class="forms_field-input" required />
 						</div>
 						<div class="forms_field">
-							<input type="text" placeholder="Last Name" class="forms_field-input" required />
+							<input type="text" name="lastname" placeholder="Last Name" class="forms_field-input" required />
 						</div>
 						<div class="forms_field">
-							<input type="email" placeholder="Email" class="forms_field-input" required />
+							<input type="email"name="email" placeholder="Email" class="forms_field-input" required />
 						</div>
 						<div class="forms_field">
-							<input type="password" placeholder="Password" class="forms_field-input" required />
+							<input type="password" name="password" placeholder="Password" class="forms_field-input" required />
 						</div>
 					</fieldset>
 					<div class="forms_buttons">
