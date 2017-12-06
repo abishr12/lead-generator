@@ -7,8 +7,7 @@ module.exports.signin = function (req, res) {
 };
 
 module.exports.dashboard = function (req, res) {
-	let user_info = req.user
-	console.log(user_info);
+	let user_info = req.user;
 	res.render('dashboard', {
 		user_id: user_info.id,
 		first_name: user_info.firstname,
