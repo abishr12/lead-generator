@@ -30,8 +30,6 @@ router.get("/search/:email", function(req, res) {
       biography: req.body.biography
     });
   });
-
-  router.get("/search/:email", function(req, res) {
       console.log("Company Data:");
       console.log(req.body);
       Company.create({

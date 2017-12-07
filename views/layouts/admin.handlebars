@@ -59,9 +59,57 @@
                         {{! Sidebar Content }}
                         <div class="sidebar-content">
                             {{! Sidebar Section }}
+
+
                             <div class="sidebar-section">
-                                <h2 class="text-light">Sign In</h2>
-                                <p>form content</p>
+
+                                <section class="user">
+                                	<div class="user_options-container">
+
+                                		<div class="user_options-forms" id="user_options-forms">
+                                			<div class="user_forms-login">
+                                				<h2 class="forms_title">Login</h2>
+                                				<form class="forms_form" id="signin" name="signin" method="post" action="signin">
+                                					<fieldset class="forms_fieldset">
+                                						<div class="forms_field">
+                                							<input type="text" name="email" placeholder="Email" class="forms_field-input" required autofocus />
+                                						</div>
+                                						<div class="forms_field">
+                                							<input name="password" type="password" placeholder="Password" class="forms_field-input" required />
+                                						</div>
+                                					</fieldset>
+                                					<div class="forms_buttons">
+                                						<input type="submit" value="Log In" class="forms_buttons-action">
+                                					</div>
+                                				</form>
+
+                                			</div>
+                                			<div class="user_forms-signup">
+                                				<h2 class="forms_title">Sign Up</h2>
+                                				<form class="forms_form" id="signup" name="signup" method="post" action="/signup">
+                                					<fieldset class="forms_fieldset">
+                                						<div class="forms_field">
+                                							<input type="text" name="firstname" placeholder="First Name" class="forms_field-input" required />
+                                						</div>
+                                						<div class="forms_field">
+                                							<input type="text" name="lastname" placeholder="Last Name" class="forms_field-input" required />
+                                						</div>
+                                						<div class="forms_field">
+                                							<input type="email"name="email" placeholder="Email" class="forms_field-input" required />
+                                						</div>
+                                						<div class="forms_field">
+                                							<input type="password" name="password" placeholder="Password" class="forms_field-input" required />
+                                						</div>
+                                					</fieldset>
+                                					<div class="forms_buttons">
+                                						<input type="submit" value="Sign up" class="forms_buttons-action">
+                                					</div>
+                                				</form>
+                                			</div>
+                                		</div>
+                                	</div>
+                                </section>
+
                             </div>
                             {{! END Sidebar Section }}
                         </div>
@@ -87,43 +135,43 @@
                             {{! Example Title }}
                             <div class="block-title">
                                 <h2 class="leadInfoHeader">Lead's Information</h2>
+                                <div class="block-options pull-right">
+                                  <!-- <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a> -->
+                                  <div class="btn-group">
+                                    <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default dropdown-toggle enable-tooltip" data-toggle="dropdown" title="Options">
+                                      <i class="fa fa-chevron-down"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                      <li>
+                                        <a href="javascript:void(0)">
+                                          <i class="fa fa-pencil pull-right"></i>
+                                          Edit
+                                        </a>
+                                      </li>
+                                      <li>
+                                        <a href="javascript:void(0)">
+                                          <i class="fa fa-refresh pull-right"></i>
+                                          Update
+                                        </a>
+                                      </li>
+                                      <li class="divider"></li>
+                                      <li>
+                                        <a href="javascript:void(0)">
+                                          <i class="fa fa-trash-o fa-fw pull-right"></i>
+                                          Delete
+                                        </a>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
                             </div>
                             <!-- handlebars for email searches go in here  -->
 
-                            <div class="block-options pull-right">
-                              <!-- <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a> -->
-                              <div class="btn-group">
-                                <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default dropdown-toggle enable-tooltip" data-toggle="dropdown" title="Options">
-                                  <i class="fa fa-chevron-down"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                  <li>
-                                    <a href="javascript:void(0)">
-                                      <i class="fa fa-pencil pull-right"></i>
-                                      Edit
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="javascript:void(0)">
-                                      <i class="fa fa-refresh pull-right"></i>
-                                      Update
-                                    </a>
-                                  </li>
-                                  <li class="divider"></li>
-                                  <li>
-                                    <a href="javascript:void(0)">
-                                      <i class="fa fa-trash-o fa-fw pull-right"></i>
-                                      Delete
-                                    </a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
                         </div>
 
                         <div class="sidebar-content">
                             <ul class="sidebar-nav">
-                              {{!-- <li>  
+                              {{!-- <li>
                                   {{name}}
 
                                   <button class="devour-it" data-id= "{{this.id}}"
@@ -146,18 +194,18 @@
                         </ul>
                         <ul class="nav navbar-nav-custom pull-right">
                             <li>
-                                <form action="index.html" method="post" class="navbar-form-custom" role="search">
+                                <form action="/" method="post" class="navbar-form-custom" role="search">
                                     <input type="text" id="top-search" name="top-search" class="form-control" placeholder="Search..">
                                 </form>
                             </li>
                             <li>
                                 <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar-alt');this.blur();">
-                                    <i class="gi gi-settings"></i>
+                                  Login
                                 </a>
                             </li>
                             <li class="dropdown">
                                 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                                    <p class="userName">Hi! John Doe</p>
+                                    <p class="userName">Hi! {{ first_name }} </p>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li>
