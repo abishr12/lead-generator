@@ -48,31 +48,3 @@ $(document).ready(function(e) {
     });
   });
 });
-
-// $(document).ready(function(e) {
-// // TODO: Take in User Id
-// $("#top-search").on("click", function(event) {
-//   event.preventDefault();
-//   console.log("working");
-//   var emailSearch = $("#top-search")
-//     .val()
-//     .trim();
-//   var url = "/api/search/" + emailSearch;
-//   console.log("url", url);
-//   $.get(url).done(function(data) {
-//     console.log("data in script.js", data)
-//   })
-// })
-//     console.log("data in script.js", data);
-//     location.reload();
-//   });
-// });
-// $.post("/api/search/" + emailSearch, function(req, res){
-//
-// })
-//   // TODO: AJAX request for saving emails
-//   // TODO: AJAX request for loading up saved emails
-//
-//
-// })
-// });

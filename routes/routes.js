@@ -3,7 +3,7 @@ var router = express.Router();
 var clearbitSearch = require("../utils/clearbit-search");
 var tableCreate = require("../utils/table-create");
 var validateEmail = require("../utils/validate-Email");
-var db = require("../models/index.js");
+var db = require("../models");
 
 // Require auth controller and passport.js module
 const authctrl = require("../controllers/authctrl.js");
@@ -16,11 +16,17 @@ var models = require("../models");
 // Homepage
 // ==
 router.get("/", function(req, res) {
-  db.Target.findAll({}).then(function(targets) {
-    console.log(targets);
+  db.Target.findAll({
+    include: [{
+      model: db.Company,
+      include: [{
+        model: db.CompanyEmail
+      }]
+    }]
+  }).then(function(targets) {
+    console.log(JSON.stringify(targets))
     res.render("index", {
       'targets': targets
-
     });
   });
 });

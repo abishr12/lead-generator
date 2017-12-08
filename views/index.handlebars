@@ -1,10 +1,8 @@
 
     <div class="block">
         <div class="block-title">
-            <h2 class="leadInfoHeader">{{ first_name }} {{ last_name }} {{ user_id}}</h2>
+            {{!-- <h2 class="leadInfoHeader">{{ first_name }} {{ last_name }} {{ user_id}}</h2> --}}
             <div class="block-options">
-              <i class="gi gi-bin pull-right"></i>
-              <i class="gi gi-disk_saved pull-right"></i>
               <h2>Saved Lead</h2>
               <!-- <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a> -->
               {{!-- <div class="btn-group">
@@ -37,26 +35,34 @@
             </div>
             <table>
                 {{#each targets}}
-                <div class="">
                   <tr class="target">
-                    <tr><td>{{name}}</td></tr>
+                    <th>{{name}}</th>
+                    <i class="gi gi-bin pull-right"></i>
+                    <i class="gi gi-disk_saved pull-right"></i>
+                    <tr><td>{{biography}}</td></tr>
                     <tr><td>{{email}}</td></tr>
-                    <tr><td>{{employmentCompany}}</td></tr>
                     <tr><td>{{employmentTitle}}</td></tr>
+                    <tr><td>{{employmentCompany}}</td></tr>
+                    <tr><td>{{location}}</td></tr>
                     <tr><td>{{linkedInURL}}</td></tr>
                     <tr><td>{{twitterHandle}}</td></tr>
-                    <tr><td>{{location}}</td></tr>
-                    <tr><td>{{biography}}</td></tr>
                   </tr>
-                  {{#each company}}
-                  <tr class="company">
+                  {{#each Company}}
+                  <tr class="Company">
                     <td>{{companyName}}</td>
                     <td>{{companyFounded}}</td>
                     <td>{{companyURL}}</td>
                     <td>{{companyBio}}</td>
+                    <td>
+                      <ul>
+                        {{#each CompanyEmail}}
+                        <li>
+                          {{email}}
+                        </li>
+                        {{/each}}
+                      </table>
                   </tr>
                   {{/each}}
-                </div>
                 {{/each}}
             </table>
         </div>
