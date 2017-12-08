@@ -149,16 +149,6 @@
                             <div class="block-title">
                                 <h2 class="leadInfoHeader">Saved Lead</h2>
                                 <div class="block-options pull-right">
-                                  <table>
-                                    {{#each targets}}
-                                      <tr class="target">
-                                        <th>{{name}}</th>
-                                        <i class="gi gi-bin pull-right"></i>
-                                        <i class="hi hi-ok"></i>
-                                        <tr><td>{{email}}</td></tr>
-                                      </tr>
-                                    {{/each}}
-                                  </table>
                                   <!-- <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a> -->
                                   <div class="btn-group">
                                     <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default dropdown-toggle enable-tooltip" data-toggle="dropdown" title="Options">
@@ -189,6 +179,16 @@
                                 </div>
                             </div>
                             <!-- handlebars for email searches go in here  -->
+                            <table>
+                              {{#each targets}}
+                              <tr class="target">
+                                <th>{{name}}</th>
+                                <i class="gi gi-bin pull-right"></i>
+                                <i class="hi hi-ok"></i>
+                                <tr><td>{{email}}</td></tr>
+                              </tr>
+                              {{/each}}
+                            </table>
 
                         </div>
 
