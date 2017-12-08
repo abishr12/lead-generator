@@ -1,0 +1,24 @@
+  <table>
+      {{#each target}}
+      <tr>
+        <td>{{target.name}}</td>
+        <td>{{target.email}}</td>
+        <td>{{target.employmentCompany}}</td>
+        <td>{{target.employmentTitle}}</td>
+        <td>{{target.linkedInURL}}</td>
+        <td>{{target.twitterHandle}}</td>
+        <td>{{target.location}}</td>
+        <td>{{target.biography}}</td>
+      </tr>
+      {{/each}}
+
+      {{#each company}}
+        <tr>
+          <td>{{company.companyName}}</td>
+          <td>{{company.companyFounded}}</td>
+          <td>{{company.companyURL}}</td>
+          <td>{{company.companyBio}}</td>
+        </tr>
+      {{/each}}
+  </table>
+</div>

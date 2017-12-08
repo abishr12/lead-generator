@@ -1,36 +1,18 @@
-<table>
-    {{#each target}}
-    <tr>
-      <td>{{target.name}}</td>
-      <td>{{target.email}}</td>
-      <td>{{target.employmentCompany}}</td>
-      <td>{{target.employmentTitle}}</td>
-      <td>{{target.linkedInURL}}</td>
-      <td>{{target.twitterHandle}}</td>
-      <td>{{target.location}}</td>
-      <td>{{target.biography}}</td>
-    </tr>
-    {{/each}}
 
-    {{#each company}}
-      <tr>
-        <td>{{company.companyName}}</td>
-        <td>{{company.companyFounded}}</td>
-        <td>{{company.companyURL}}</td>
-        <td>{{company.companyBio}}</td>
-      </tr>
-    {{/each}}
-</table>
-
+    <div class="block">
         <div class="block-title">
             <h2 class="leadInfoHeader">{{ first_name }} {{ last_name }} {{ user_id}}</h2>
-            <div class="block-options pull-right">
+            <div class="block-options">
+              <i class="gi gi-bin pull-right"></i>
+              <i class="gi gi-disk_saved pull-right"></i>
+              <h2>Saved Lead</h2>
               <!-- <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a> -->
-              <div class="btn-group">
+              {{!-- <div class="btn-group">
                 <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default dropdown-toggle enable-tooltip" data-toggle="dropdown" title="Options">
                   <i class="fa fa-chevron-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right">
+                </a> --}}
+
+                {{!-- <ul class="dropdown-menu dropdown-menu-right">
                   <li>
                     <a href="javascript:void(0)">
                       <i class="fa fa-pencil pull-right"></i>
@@ -50,7 +32,32 @@
                       Delete
                     </a>
                   </li>
-                </ul>
-              </div>
+                </ul> --}}
+              {{!-- </div> --}}
             </div>
+            <table>
+                {{#each targets}}
+                <div class="">
+                  <tr class="target">
+                    <tr><td>{{name}}</td></tr>
+                    <tr><td>{{email}}</td></tr>
+                    <tr><td>{{employmentCompany}}</td></tr>
+                    <tr><td>{{employmentTitle}}</td></tr>
+                    <tr><td>{{linkedInURL}}</td></tr>
+                    <tr><td>{{twitterHandle}}</td></tr>
+                    <tr><td>{{location}}</td></tr>
+                    <tr><td>{{biography}}</td></tr>
+                  </tr>
+                  {{#each company}}
+                  <tr class="company">
+                    <td>{{companyName}}</td>
+                    <td>{{companyFounded}}</td>
+                    <td>{{companyURL}}</td>
+                    <td>{{companyBio}}</td>
+                  </tr>
+                  {{/each}}
+                </div>
+                {{/each}}
+            </table>
         </div>
+      </div>

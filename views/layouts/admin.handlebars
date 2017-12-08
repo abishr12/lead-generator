@@ -65,6 +65,19 @@
 
                                 <section class="user">
                                 	<div class="user_options-container">
+                                		<div class="user_options-text">
+                                			<div class="user_options-unregistered">
+                                				{{!-- <h2 class="user_unregistered-title">Don't have an account?</h2>
+                                				<p class="user_unregistered-text">Banjo tote bag bicycle rights, High Life sartorial cray craft beer whatever street art fap.</p>
+                                				<button class="user_unregistered-signup" id="signup-button">Sign up</button> --}}
+                                			</div>
+
+                                			<div class="user_options-registered">
+                                				{{!-- <h2 class="user_registered-title">Have an account?</h2>
+                                				<p class="user_registered-text">Banjo tote bag bicycle rights, High Life sartorial cray craft beer whatever street art fap.</p>
+                                				<button class="user_registered-login" id="login-button">Login</button> --}}
+                                			</div>
+                                		</div>
 
                                 		<div class="user_options-forms" id="user_options-forms">
                                 			<div class="user_forms-login">
@@ -194,8 +207,9 @@
                         </ul>
                         <ul class="nav navbar-nav-custom pull-right">
                             <li>
-                                <form action="/" method="post" class="navbar-form-custom" role="search">
+                                <form id="search-form" method="get" class="navbar-form-custom" role="search">
                                     <input type="text" id="top-search" name="top-search" class="form-control" placeholder="Search..">
+                                    <input type="submit" name="submit" style="display: none;" />
                                 </form>
                             </li>
                             <li>
@@ -219,6 +233,7 @@
                         </ul>
                     </header>
                     <div id="page-content">
+                      <div id="temporary-placeholder"></div>
                       {{{ body }}}
                     </div>
                 </div>
@@ -229,5 +244,56 @@
         <script src="ux/js/plugins.js"></script>
         <script src="ux/js/app.js"></script>
         {{! <script src="js/script.js"></script> }}
+        <script>
+          $(document).ready(function(e) {
+            // ===
+            // Load up saved emails when the page is loaded.
+            // ===
+            var initInterfaceData = function() {
+              var containerElement = $('#temporary-placeholder');
+              $.get('/api/emails').done(function(responseHTML) {                // GET call to fetch all emails. match the url with the one in your controller.
+                containerElement.html(responseHTML);                            // responseHTML should be a partial handlebars template
+              });
+            };
+
+            initInterfaceData();                                                // initialize the ux by calling our helper function
+
+            // ===                                                              // add a header to your event bindings so it's more understandable
+            // Search Form: submit
+            // ===
+            $(document).on("submit", "#search-form", function(event) {          // changed: use delegated event handling
+              event.preventDefault();                                           // event.preventDefault() halts the form submission so we can do whatever we want in it's place
+
+              var userSubmittedEmail = $("#top-search").val().trim();
+              var url = "/api/search/" + userSubmittedEmail;                          // build the url with the encoded email address.
+
+              $.get(url).done(function(data) {
+                console.log("data in script.js: ", data);
+
+                // do the stuff you need to do to render here
+
+                // changed: note that this must be the last call within the scope of $.get
+                // do not uncomment this until you are injecting HTML into the DOM.
+                // it will only cause headaches and confusion if you try to uncomment it now.
+                // location.reload();
+              });
+            });
+
+            // ===
+            // Add Result: When clicked, makes an AJAX request for saving emails
+            // Assumes the following html:
+            // <a href="" class=".add-search-result-button" data-email="{{ target.email }}">Add This to Center of Page</a>
+            // ===
+            $(document).on("click", ".add-search-result-button", function(event) {
+              event.preventDefault();
+
+              var emailToAdd = $(this).data('email');
+              var url = "/api/search/" + encodedEmail;
+              $.post(url).done(function(htmlResponse) {
+                console.log(response);
+              });
+            });
+          });
+        </script>
     </body>
 </html>

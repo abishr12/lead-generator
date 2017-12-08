@@ -12,8 +12,17 @@ const passport = require("passport");
 // Requre models to have access to User module
 var models = require("../models");
 
+// ==
+// Homepage
+// ==
 router.get("/", function(req, res) {
-  res.render("index", req.body);
+  db.Target.findAll({}).then(function(targets) {
+    console.log(targets);
+    res.render("index", {
+      'targets': targets
+
+    });
+  });
 });
 
 //API for saved emails search
@@ -54,11 +63,25 @@ router.get("/api/search/:email", (req, res) => {
     clearbitSearch(emailSearch, function(data) {
       res.json(data);
       tableCreate(data);
+      console.log("data", data);
     });
   } else {
     throw Error("Invalid Email");
   }
 });
+
+router.post("api/search/:email",  (req, res) => {
+  emailSearch = req.params.email;
+  if (validateEmail(emailSearch)) {
+    clearbitSearch(emailSearch, function(data) {
+      res.json(data);
+      tableCreate(data);
+      console.log("data", data);
+    });
+  } else {
+    throw Error("Invalid Email");
+  }
+})
 
 //Save the email to be searched stored in the database
 router.put("/api/save/:email", (req, res) => {
