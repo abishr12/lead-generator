@@ -1,0 +1,11 @@
+.navbar-inverse {
+  background: #172f47 !important;
+}
+
+.navbar-inverse .navbar-brand {
+   color: #FFFFFF !important;
+}
+
+.placeholders table, .placeholders h2 {
+  text-align: left;
+}
