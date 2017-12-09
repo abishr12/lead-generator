@@ -4,7 +4,7 @@ $(document).ready(function(e) {
   // ===
   var initInterfaceData = function() {
     if (document.location.href.indexOf('/api/') !== -1) {
-      var containerElement = $('#temporary-placeholder');
+      var containerElement = $('#saved-results-container');
       $.get('/api/emails').done(function(responseHTML) {                // GET call to fetch all emails. match the url with the one in your controller.
         containerElement.html(responseHTML);                            // responseHTML should be a partial handlebars template
       });
@@ -15,11 +15,12 @@ $(document).ready(function(e) {
   // ===                                                              // add a header to your event bindings so it's more understandable
   // Search Form: submit
   // ===
-  $(document).on("submit", "#search-form", function(event) {          // changed: use delegated event handling
+  $(document).on("submit", "#search-results-container", function(event) {          // changed: use delegated event handling
     event.preventDefault();                                           // event.preventDefault() halts the form submission so we can do whatever we want in it's place
 
     var userSubmittedEmail = $("#top-search").val().trim();
-    var url = "/api/search/" + userSubmittedEmail;                          // build the url with the encoded email address.
+    var url = "/api/search/" + userSubmittedEmail;
+    console.log("url", url);                        // build the url with the encoded email address.
 
     $.get(url).done(function(responseHtml) {
       console.log("rendered response: ", responseHtml);
@@ -37,8 +38,10 @@ $(document).ready(function(e) {
 
     var emailToAdd = $(this).data('email');
     var url = "/api/search/" + encodedEmail;
+    console.log("url", url);
+    console.log("emailtoadd", emailToAdd);
     $.post(url).done(function(htmlResponse) {
-      console.log(response);
+      console.log(htmlResponse);
     });
   });
 });

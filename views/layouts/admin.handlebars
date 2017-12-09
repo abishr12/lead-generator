@@ -33,7 +33,7 @@
         {{! End Required }}
 
         {{! Customized, project-specific CSS goes below. }}
-        <link rel="stylesheet" href="css/style.css">
+        {{!<link rel="stylesheet" href="css/style.css">}}
     </head>
     <body>
         <div id="page-wrapper">
@@ -149,6 +149,16 @@
                             <div class="block-title">
                                 <h2 class="leadInfoHeader">Saved Lead</h2>
                                 <div class="block-options pull-right">
+                                  <table>
+                                    {{#each targets}}
+                                      <tr class="target">
+                                        <th>{{name}}</th>
+                                        <i class="gi gi-bin pull-right"></i>
+                                        <i class="hi hi-ok"></i>
+                                        <tr><td>{{email}}</td></tr>
+                                      </tr>
+                                    {{/each}}
+                                  </table>
                                   <!-- <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a> -->
                                   <div class="btn-group">
                                     <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default dropdown-toggle enable-tooltip" data-toggle="dropdown" title="Options">
@@ -179,16 +189,6 @@
                                 </div>
                             </div>
                             <!-- handlebars for email searches go in here  -->
-                            <table>
-                              {{#each targets}}
-                              <tr class="target">
-                                <th>{{name}}</th>
-                                <i class="gi gi-bin pull-right"></i>
-                                <i class="hi hi-ok"></i>
-                                <tr><td>{{email}}</td></tr>
-                              </tr>
-                              {{/each}}
-                            </table>
 
                         </div>
 
@@ -243,8 +243,9 @@
                         </ul>
                     </header>
                     <div id="page-content">
-                      <div id="temporary-placeholder"></div>
+                      <div id="search-results-container"></div>
                       {{{ body }}}
+
                     </div>
                 </div>
             </div>
@@ -256,30 +257,19 @@
         {{! <script src="js/script.js"></script> }}
         <script>
           $(document).ready(function(e) {
-            // ===
-            // Load up saved emails when the page is loaded.
-            // ===
-            var initInterfaceData = function() {
-              var containerElement = $('#temporary-placeholder');
-              $.get('/api/emails').done(function(responseHTML) {                // GET call to fetch all emails. match the url with the one in your controller.
-                containerElement.html(responseHTML);                            // responseHTML should be a partial handlebars template
-              });
-            };
-
-            initInterfaceData();                                                // initialize the ux by calling our helper function
-
             // ===                                                              // add a header to your event bindings so it's more understandable
             // Search Form: submit
             // ===
             $(document).on("submit", "#search-form", function(event) {          // changed: use delegated event handling
-              event.preventDefault();                                           // event.preventDefault() halts the form submission so we can do whatever we want in it's place
+              event.preventDefault();
+              console.log('called')                                        // event.preventDefault() halts the form submission so we can do whatever we want in it's place
 
               var userSubmittedEmail = $("#top-search").val().trim();
-              var url = "/api/search/" + userSubmittedEmail;                          // build the url with the encoded email address.
-
+              var url = "/api/search/" + userSubmittedEmail;
+              console.log($('#search-results-container'));
               $.get(url).done(function(responseHtml) {
                 console.log("rendered response: ", responseHtml);
-                $('#placeholder').html(responseHtml);
+                $('#search-results-container').html(responseHtml);
               });
             });
 
