@@ -1,53 +1,47 @@
-// {
-//   "target": {
-//     "name": "Bob Goodson",
-//     "email": "bgoodson@quid.com",
-//     "employmentCompany": "Quid",
-//     "employmentTitle": "Founder, CEO",
-//     "linkedInURL": "https:www.linkedin.com/in/bobgoodson",
-//     "twitterHandle": "@null",
-//     "location": "San Francisco, CA, US",
-//     "biography": null
-//   },
-//   "company": {
-//     "companyName": "Quid",
-//     "companyFounded": 2010,
-//     "companyURL": "http://www.quid.com",
-//     "companyBio": "Quid is a platform that searches, analyzes and visualizes the world’s collective intelligence to help answer strategic questions.",
-//     "companyEmails": [
-//       "general@quid.com",
-//       "press@quid.com"
-//     ],
-//     "companyPhone": "+1 415-495-1062",
-//     "companyCrunchbase": "https://www.crunchbase.com/organization/quid",
-//     "amountRaised": 66500000,
-//     "revenue": "$10M-$50M",
-//     "logo": "https://logo.clearbit.com/quid.com"
-//   }
-// }
-
 $(document).ready(function(e) {
-  // TODO: Take in User Id
-  $("#searchBtn").on("click", function(event) {
-    event.preventDefault();
-    console.log("working");
-    var emailSearch = $("#searchField")
-      .val()
-      .trim();
-    var url = "/api/search/" + emailSearch;
-    console.log(url);
-    $.get(url).done(function(data) {
-      console.log(data)
-    })
-  })
-      console.log(data);
-      location.reload();
+  // ===
+  // Load up saved emails when the page is loaded.
+  // ===
+  var initInterfaceData = function() {
+    if (document.location.href.indexOf('/api/') !== -1) {
+      var containerElement = $('#saved-results-container');
+      $.get('/api/emails').done(function(responseHTML) {                // GET call to fetch all emails. match the url with the one in your controller.
+        containerElement.html(responseHTML);                            // responseHTML should be a partial handlebars template
+      });
+    }
+  };
+  initInterfaceData();                                                // initialize the ux by calling our helper function
+
+  // ===                                                              // add a header to your event bindings so it's more understandable
+  // Search Form: submit
+  // ===
+  $(document).on("submit", "#search-results-container", function(event) {          // changed: use delegated event handling
+    event.preventDefault();                                           // event.preventDefault() halts the form submission so we can do whatever we want in it's place
+
+    var userSubmittedEmail = $("#top-search").val().trim();
+    var url = "/api/search/" + userSubmittedEmail;
+    console.log("url", url);                        // build the url with the encoded email address.
+
+    $.get(url).done(function(responseHtml) {
+      console.log("rendered response: ", responseHtml);
+      $('#search-results-container').html(responseHtml);
     });
   });
 
-  // TODO: AJAX request for saving emails
-  // TODO: AJAX request for loading up saved emails
+  // ===
+  // Add Result: When clicked, makes an AJAX request for saving emails
+  // Assumes the following html:
+  // <a href="" class=".add-search-result-button" data-email="{{ target.email }}">Add This to Center of Page</a>
+  // ===
+  $(document).on("click", ".add-search-result-button", function(event) {
+    event.preventDefault();
 
-
-})
+    var emailToAdd = $(this).data('email');
+    var url = "/api/search/" + encodedEmail;
+    console.log("url", url);
+    console.log("emailtoadd", emailToAdd);
+    $.post(url).done(function(htmlResponse) {
+      console.log(htmlResponse);
+    });
+  });
 });

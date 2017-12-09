@@ -33,10 +33,10 @@
         {{! End Required }}
 
         {{! Customized, project-specific CSS goes below. }}
-        <link rel="stylesheet" href="css/style.css">
+        {{!<link rel="stylesheet" href="css/style.css">}}
     </head>
     <body>
-        <div id="page-wrapper" class="page-loading">
+        <div id="page-wrapper">
             {{! Preloader: Preloader functionality (initialized in js/app.js) - pageLoading() }}
             {{! Used only if the class 'page-loading' is added in #page-wrapper element (HTML version) }}
             <div class="preloader">
@@ -65,6 +65,19 @@
 
                                 <section class="user">
                                 	<div class="user_options-container">
+                                		<div class="user_options-text">
+                                			<div class="user_options-unregistered">
+                                				{{!-- <h2 class="user_unregistered-title">Don't have an account?</h2>
+                                				<p class="user_unregistered-text">Banjo tote bag bicycle rights, High Life sartorial cray craft beer whatever street art fap.</p>
+                                				<button class="user_unregistered-signup" id="signup-button">Sign up</button> --}}
+                                			</div>
+
+                                			<div class="user_options-registered">
+                                				{{!-- <h2 class="user_registered-title">Have an account?</h2>
+                                				<p class="user_registered-text">Banjo tote bag bicycle rights, High Life sartorial cray craft beer whatever street art fap.</p>
+                                				<button class="user_registered-login" id="login-button">Login</button> --}}
+                                			</div>
+                                		</div>
 
                                 		<div class="user_options-forms" id="user_options-forms">
                                 			<div class="user_forms-login">
@@ -134,8 +147,18 @@
                         <div class="block">
                             {{! Example Title }}
                             <div class="block-title">
-                                <h2 class="leadInfoHeader">Lead's Information</h2>
+                                <h2 class="leadInfoHeader">Saved Lead</h2>
                                 <div class="block-options pull-right">
+                                  <table>
+                                    {{#each targets}}
+                                      <tr class="target">
+                                        <th>{{name}}</th>
+                                        <i class="gi gi-bin pull-right"></i>
+                                        <i class="hi hi-ok"></i>
+                                        <tr><td>{{email}}</td></tr>
+                                      </tr>
+                                    {{/each}}
+                                  </table>
                                   <!-- <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a> -->
                                   <div class="btn-group">
                                     <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default dropdown-toggle enable-tooltip" data-toggle="dropdown" title="Options">
@@ -194,8 +217,9 @@
                         </ul>
                         <ul class="nav navbar-nav-custom pull-right">
                             <li>
-                                <form action="/" method="post" class="navbar-form-custom" role="search">
+                                <form id="search-form" method="get" class="navbar-form-custom" role="search">
                                     <input type="text" id="top-search" name="top-search" class="form-control" placeholder="Search..">
+                                    <input type="submit" name="submit" style="display: none;" />
                                 </form>
                             </li>
                             <li>
@@ -219,7 +243,9 @@
                         </ul>
                     </header>
                     <div id="page-content">
+                      <div id="search-results-container"></div>
                       {{{ body }}}
+
                     </div>
                 </div>
             </div>
@@ -229,5 +255,39 @@
         <script src="ux/js/plugins.js"></script>
         <script src="ux/js/app.js"></script>
         {{! <script src="js/script.js"></script> }}
+        <script>
+          $(document).ready(function(e) {
+            // ===                                                              // add a header to your event bindings so it's more understandable
+            // Search Form: submit
+            // ===
+            $(document).on("submit", "#search-form", function(event) {          // changed: use delegated event handling
+              event.preventDefault();
+              console.log('called')                                        // event.preventDefault() halts the form submission so we can do whatever we want in it's place
+
+              var userSubmittedEmail = $("#top-search").val().trim();
+              var url = "/api/search/" + userSubmittedEmail;
+              console.log($('#search-results-container'));
+              $.get(url).done(function(responseHtml) {
+                console.log("rendered response: ", responseHtml);
+                $('#search-results-container').html(responseHtml);
+              });
+            });
+
+            // ===
+            // Add Result: When clicked, makes an AJAX request for saving emails
+            // Assumes the following html:
+            // <a href="" class=".add-search-result-button" data-email="{{ target.email }}">Add This to Center of Page</a>
+            // ===
+            $(document).on("click", ".add-search-result-button", function(event) {
+              event.preventDefault();
+
+              var emailToAdd = $(this).data('email');
+              var url = "/api/search/" + encodedEmail;
+              $.post(url).done(function(htmlResponse) {
+                console.log(response);
+              });
+            });
+          });
+        </script>
     </body>
 </html>
