@@ -36,7 +36,7 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <div id="page-wrapper" class="page-loading">
+        <div id="page-wrapper">
             {{! Preloader: Preloader functionality (initialized in js/app.js) - pageLoading() }}
             {{! Used only if the class 'page-loading' is added in #page-wrapper element (HTML version) }}
             <div class="preloader">
@@ -277,15 +277,9 @@
               var userSubmittedEmail = $("#top-search").val().trim();
               var url = "/api/search/" + userSubmittedEmail;                          // build the url with the encoded email address.
 
-              $.get(url).done(function(data) {
-                console.log("data in script.js: ", data);
-
-                // do the stuff you need to do to render here
-
-                // changed: note that this must be the last call within the scope of $.get
-                // do not uncomment this until you are injecting HTML into the DOM.
-                // it will only cause headaches and confusion if you try to uncomment it now.
-                // location.reload();
+              $.get(url).done(function(responseHtml) {
+                console.log("rendered response: ", responseHtml);
+                $('#placeholder').html(responseHtml);
               });
             });
 
