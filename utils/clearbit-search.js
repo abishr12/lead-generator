@@ -1,5 +1,4 @@
-var key = require("../keys/keys.js");
-var clearbit = require("clearbit")(key.apiKey);
+var clearbit = require("clearbit")(process.env.API_KEY);
 
 //Clearbit Search Function
 var clearbitSearch = (emailsToSearch, callback) => {
