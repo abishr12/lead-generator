@@ -39,12 +39,11 @@ var clearbitSearch = (emailsToSearch, callback) => {
       workingFor.amountRaised = company.metrics.raised;
       workingFor.revenue = company.metrics.estimatedAnnualRevenue;
       workingFor.logo = company.logo;
-      // console.log("data", data)
-      // console.log("response", response)
+
       callback(data);
     })
     .catch(err => {
-      // throw err;
+      throw err;
     });
 };
 

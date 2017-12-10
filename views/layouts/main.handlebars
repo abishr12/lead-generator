@@ -1,169 +1,49 @@
 <!DOCTYPE html>
-{{! Required --- don't touch! }}
-  <!--[if IE 9]><html class="no-js lt-ie10" lang="en"><![endif]-->
-  <!--[if gt IE 9]><html class="no-js" lang="en"><![endif]-->
-{{! End Required }}
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
-      <title>LogDNA</title>
-      {{! Required --- don't touch! }}
-      <link rel="shortcut icon" href="ux/img/favicon.png">
-      <link rel="apple-touch-icon" href="ux/img/icon57.png" sizes="57x57">
-      <link rel="apple-touch-icon" href="ux/img/icon72.png" sizes="72x72">
-      <link rel="apple-touch-icon" href="ux/img/icon76.png" sizes="76x76">
-      <link rel="apple-touch-icon" href="ux/img/icon114.png" sizes="114x114">
-      <link rel="apple-touch-icon" href="ux/img/icon120.png" sizes="120x120">
-      <link rel="apple-touch-icon" href="ux/img/icon144.png" sizes="144x144">
-      <link rel="apple-touch-icon" href="ux/img/icon152.png" sizes="152x152">
-      <link rel="apple-touch-icon" href="ux/img/icon180.png" sizes="180x180">
-      <link rel="stylesheet" href="ux/css/bootstrap.min.css">
-      <link rel="stylesheet" href="ux/css/plugins.css">
-      <link rel="stylesheet" href="ux/css/main.css">
-      <link rel="stylesheet" href="ux/css/themes.css">
-      <script src="ux/js/vendor/modernizr-3.3.1.min.js"></script>
-      {{! End Required }}
-      {{! Customized, project-specific CSS goes below. }}
-      <link rel="stylesheet" href="css/style.css">
-  </head>
-    <body>
-        <div id="page-container" class="boxed">
-          <header>
-              <div class="container">
-                  <a href="/" class="site-logo">
-                      <i class="fa fa-cube"></i> Lead<strong>Generator</strong>
-                  </a>
-                  <nav>
-                      {{! Menu Toggle: Toggles menu on small screens }}
-                      <a href="javascript:void(0)" class="btn btn-default site-menu-toggle visible-xs visible-sm">Menu</a>
-                      {{! END Menu Toggle }}
-                      <ul class="site-nav">
-                          <li>
-                              <a href="index.html" class="active">Home</a>
-                          </li>
-                          <li>
-                              <a href="javascript:void(0)" class="site-nav-sub">
-                                  <i class="fa fa-angle-down site-nav-arrow"></i>
-                                  Leads
-                              </a>
-                              <ul>
-                                  <li>
-                                      <a href="javascript:void(0)">Page</a>
-                                  </li>
-                                  <li>
-                                      <a href="javascript:void(0)">Another Page</a>
-                                  </li>
-                                  <li>
-                                      <a href="javascript:void(0)">Page #3</a>
-                                  </li>
-                              </ul>
-                          </li>
-                          <li>
-                                <a href="javascript:void(0)">Account</a>
-                          </li>
-                          <li>
-                              <a href="javascript:void(0)">About</a>
-                          </li>
-                          <li>
-                              <a href="javascript:void(0)">Contact</a>
-                          </li>
-                      </ul>
-                  </nav>
-              </div>
-            </header>
-            {{! Intro + Action }}
-            <section class="site-section site-section-top site-section-light themed-background-dark-default">
-                <div class="container">
-                    <div class="push text-center">
-                        <h1 class="animation-fadeInQuick2Inv"><strong>Lead Generator</strong></h1>
-                        <h2 class="text-light-op animation-fadeInQuickInv push-bit"><strong>A tagline for the lead generator.</strong></h2>
-                        <a href="javascript:void(0)" class="btn btn-lg btn-success push-right-left"><strong>Generate leads now!</strong></a>
-                        <a href="javascript:void(0)" class="btn btn-lg btn-info push-right-left"><strong>Or learn more&hellip;</strong></a>
-                    </div>
-                </div>
-            </section>
-            {{! END Intro + Action }}
+<!--[if IE 9]><html lang="en-us" class="ie9 layout-pf layout-pf-fixed"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en-us" class="layout-pf layout-pf-fixed">
+<!--<![endif]-->
 
-            {{! Section #1 }}
-            <section class="site-content site-section border-bottom">
-                <div class="container">
-                    <h2 class="site-heading text-center push"><strong>Main Body.</strong></h2>
-                    {{{ body }}}
-                    {{!-- {{{ result }}} --}}
-                    {{!-- {{{ result }}} --}}
-                </div>
-            </section>
-            {{! END Section #1 }}
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>leadGenerator</title>
+  <meta name="description" content="...">
 
-            {{! Section #2 }}
-            <section class="site-content site-section themed-background-muted border-bottom">
-                <div class="container">
-                    <h2 class="site-heading text-center push"><strong>Another Section.</strong></h2>
-                </div>
-            </section>
-            {{! END Section #2 }}
 
-            {{! Footer }}
-            <footer class="site-footer site-section site-section-light">
-                <div class="container">
-                    {{! Footer Links }}
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <h4 class="footer-heading">Main Links</h4>
-                            <ul class="footer-nav ul-breath list-unstyled">
-                                <li><a href="javascript:void(0)">Link #1</a></li>
-                                <li><a href="javascript:void(0)">Link #2</a></li>
-                                <li><a href="javascript:void(0)">Link #3</a></li>
-                                <li><a href="javascript:void(0)">Link #4</a></li>
-                                <li><a href="javascript:void(0)">Link #5</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-4">
-                            <h4 class="footer-heading">Other Links</h4>
-                            <ul class="footer-nav footer-nav-links list-inline">
-                                <li><a href="javascript:void(0)"><i class="fa fa-fw fa-book"></i> Link #1</a></li>
-                                <li><a href="javascript:void(0)"><i class="fa fa-fw fa-support"></i> Link #2</a></li>
-                            </ul>
-                            <h4 class="footer-heading">Social Media</h4>
-                            <ul class="footer-nav footer-nav-links list-inline">
-                                <li><a href="javascript:void(0)" class="social-facebook" data-toggle="tooltip" title="Like our Facebook page"><i class="fa fa-fw fa-facebook"></i></a></li>
-                                <li><a href="javascript:void(0)" class="social-twitter" data-toggle="tooltip" title="Follow us on Twitter"><i class="fa fa-fw fa-twitter"></i></a></li>
-                                <li><a href="javascript:void(0)" class="social-google-plus" data-toggle="tooltip" title="Like our Google+ page"><i class="fa fa-fw fa-google-plus"></i></a></li>
-                                <li><a href="javascript:void(0)" class="social-dribbble" data-toggle="tooltip" title="Follow us on Dribbble"><i class="fa fa-fw fa-dribbble"></i></a></li>
-                                <li><a href="javascript:void(0)" class="social-youtube" data-toggle="tooltip" title="Subscribe to our Youtube channel"><i class="fa fa-fw fa-youtube-play"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-4">
-                            <h4 class="footer-heading">Sales Lead Newsletter</h4>
-                            <form action="index.html" method="post" class="form-inline" onsubmit="return false;">
-                                <div class="form-group">
-                                    <label class="sr-only" for="register-email">Your Email</label>
-                                    <div class="input-group">
-                                        <input type="email" id="register-email" name="register-email" class="form-control" placeholder="Your Email..">
-                                        <span class="input-group-btn">
-                                            <button type="submit" class="btn btn-primary">Subscribe</button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </form>
-                            <!-- <h4 class="footer-heading"><a href="http://goo.gl/RcsdAh">Sales Generator</a></h4>
-                            <em><span id="year-copy"></span></em> &copy; Crafted with <i class="fa fa-heart text-danger"></i> by the LogDNA team. -->
-                        </div>
-                    </div>
-                    {{! END Footer Links }}
-                </div>
-            </footer>
-            {{! END Footer }}
-        </div>
-        {{! END Page Container }}
-        {{! Required --- don't touch! }}
-        <a href="#" id="to-top"><i class="fa fa-arrow-up"></i></a>
-        <script src="ux/js/vendor/jquery-2.2.4.min.js"></script>
-        <script src="ux/js/vendor/bootstrap.min.js"></script>
-        <script src="ux/js/plugins.js"></script>
-        <script src="ux/js/app.js"></script>
-        {{! End Required }}
-        {{! Customized, project-specific JS goes below. }}
-        <script src="public/js/script.js"></script>
-    </body>
-</html>
+  {{#if dashboard}}
+  <link rel="shortcut icon" href="http://www.patternfly.org/components/patternfly/dist/img/favicon.ico">
+  <link rel="stylesheet" href="http://www.patternfly.org/assets/css/patternfly-adjusted.min.css">
+  <link rel="stylesheet" href="http://www.patternfly.org/components/patternfly/dist/css/patternfly-additions.min.css">
+  <link rel="stylesheet" href="http://www.patternfly.org/assets/css/patternfly-site.min.css">
+  <script type="text/javascript">
+    window.IMAGE_PATH = "/assets/img"
+  </script>
+  <script src="http://www.patternfly.org/components/jquery/dist/jquery.min.js"></script>
+  <script src="http://www.patternfly.org/components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="http://www.patternfly.org/components/datatables/media/js/jquery.dataTables.js"></script>
+  <script src="http://www.patternfly.org/components/google-code-prettify/bin/prettify.min.js"></script>
+  <script src="http://www.patternfly.org/components/clipboard/dist/clipboard.min.js"></script>
+  <script src="http://www.patternfly.org/components/patternfly/dist/js/patternfly.min.js"></script>
+  <script src="http://www.patternfly.org/components/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+  <script src="http://www.patternfly.org/components/assets/js/patternfly-site.min.js"></script>
+   {{/if}}
+ {{#if login_page}}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/login.css">
+{{/if}}
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="cards-pf">
+
+   {{{body}}}
+
+  <script type="text/javascript" src="js/script.js"></script>
+  </body>

@@ -1,72 +1,60 @@
-
-    <div class="block">
-        <div class="block-title">
-            {{!-- <h2 class="leadInfoHeader">{{ first_name }} {{ last_name }} {{ user_id}}</h2> --}}
-            {{!-- <div id="search-results-container"></div> --}}
-            <div class="block-options">
-              <h2>Lead Information</h2>
-
-              <!-- <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a> -->
-              {{!-- <div class="btn-group">
-                <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default dropdown-toggle enable-tooltip" data-toggle="dropdown" title="Options">
-                  <i class="fa fa-chevron-down"></i>
-                </a> --}}
-
-                {{!-- <ul class="dropdown-menu dropdown-menu-right">
-                  <li>
-                    <a href="javascript:void(0)">
-                      <i class="fa fa-pencil pull-right"></i>
-                      Edit
-                    </a>
-                  </li>
-                  <li>
-                    <a href="javascript:void(0)">
-                      <i class="fa fa-refresh pull-right"></i>
-                      Update
-                    </a>
-                  </li>
-                  <li class="divider"></li>
-                  <li>
-                    <a href="javascript:void(0)">
-                      <i class="fa fa-trash-o fa-fw pull-right"></i>
-                      Delete
-                    </a>
-                  </li>
-                </ul> --}}
-              {{!-- </div> --}}
-              
-            </div>
-            <table>
-                {{#each targets}}
-                  <tr class="target">
-                    <tr>{{name}}</tr>
-                    <i class="gi gi-bin pull-right"></i>
-                    <i class="hi hi-save pull-right"></i>
-                    <tr><td>{{biography}}</td></tr>
-                    <tr><td>{{email}}</td></tr>
-                    <tr><td>{{employmentTitle}}</td></tr>
-                    <tr><td>{{employmentCompany}}</td></tr>
-                    <tr><td>{{location}}</td></tr>
-                    <tr><td>{{linkedInURL}}</td></tr>
-                    <tr><td>{{twitterHandle}}</td></tr>
-                  </tr>
-                  {{#each Company}}
-                  <tr class="Company">
-                    <td>{{companyName}}</td>
-                    <td>{{companyFounded}}</td>
-                    <td>{{companyURL}}</td>
-                    <td>{{companyBio}}</td>
-                    <td>
-                      <ul>
-                        {{#each CompanyEmail}}
-                        <li>
-                          {{email}}
-                        </li>
-                        {{/each}}
-                      </table>
-                  </tr>
-                  {{/each}}
-                {{/each}}
-            </table>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img alt="LogDNA">
+      </a>
+    </div>
+  </div>
+</nav>
+<div class="row">
+  <div class="box col-md-4">
+    <div class="row">
+      <div class=" two col-md-12">
+        <div class="searchbar col-lg-12">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button class="btn btn-default" id="searchBtn" type="button">Search!</button>
+            </span>
+            <input type="text" id="searchField" class="form-control" placeholder="Email Address">
+          </div>
+        </div>
+        <div class="searchbar col-lg-12">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Add!</button>
+            </span>
+            <input type="text" class="form-control" placeholder="Email Adress">
+          </div>
         </div>
       </div>
+    </div>
+    <div class="row">
+      <div class=" four col-md-12">
+        User ID: {{ user_id }}
+        <br>
+        <span>{{ first_name }} {{ last_name }}</span>
+        <br> Emails display here when added to the list.
+        <br>
+        <br> donny.vallejo@gmail.com
+        <br> someguy@gmail.com
+        <br> somecompany@gmail.com
+        <br> whatevz@gmail.com
+        <br>
+      </div>
+    </div>
+  </div>
+  <div class="one col-md-8">
+    <div class="row">
+      <button class="toggle" type="button" name="toggle">☰</button>
+      <p>this button opens and closes the left container</p>
+    </div>
+    <br>
+    <br>
+    <p>contact information for each email adress is displayed here</p>
+  </div>
+</div>
+
+<!-- <footer>
+Group Project 2
+</footer> --->

@@ -1,47 +1,37 @@
+// var slideout = new Slideout({
+//   'panel': document.getElementById('panel'),
+//   'menu': document.getElementById('menu'),
+//   'padding': 256,
+//   'tolerance': 70
+// });
+//   document.querySelector('.toggle-button').addEventListener('click', function() {
+//   slideout.toggle();
+// });
+
 $(document).ready(function(e) {
-  // ===
-  // Load up saved emails when the page is loaded.
-  // ===
-  var initInterfaceData = function() {
-    if (document.location.href.indexOf('/api/') !== -1) {
-      var containerElement = $('#saved-results-container');
-      $.get('/api/emails').done(function(responseHTML) {                // GET call to fetch all emails. match the url with the one in your controller.
-        containerElement.html(responseHTML);                            // responseHTML should be a partial handlebars template
-      });
-    }
-  };
-  initInterfaceData();                                                // initialize the ux by calling our helper function
-
-  // ===                                                              // add a header to your event bindings so it's more understandable
-  // Search Form: submit
-  // ===
-  $(document).on("submit", "#search-results-container", function(event) {          // changed: use delegated event handling
-    event.preventDefault();                                           // event.preventDefault() halts the form submission so we can do whatever we want in it's place
-
-    var userSubmittedEmail = $("#top-search").val().trim();
-    var url = "/api/search/" + userSubmittedEmail;
-    console.log("url", url);                        // build the url with the encoded email address.
-
-    $.get(url).done(function(responseHtml) {
-      console.log("rendered response: ", responseHtml);
-      $('#search-results-container').html(responseHtml);
+  // TODO: Take in User Id
+  $("#searchBtn").on("click", function(event) {
+    event.preventDefault();
+    console.log("working");
+    var emailSearch = $("#searchField")
+      .val()
+      .trim();
+    var url = "/api/search/" + emailSearch;
+    console.log(url);
+    $.get(url).done(function(data) {
+      console.log(data);
+      location.reload();
     });
   });
 
-  // ===
-  // Add Result: When clicked, makes an AJAX request for saving emails
-  // Assumes the following html:
-  // <a href="" class=".add-search-result-button" data-email="{{ target.email }}">Add This to Center of Page</a>
-  // ===
-  $(document).on("click", ".add-search-result-button", function(event) {
-    event.preventDefault();
+  // TODO: AJAX request for saving emails
+  // TODO: AJAX request for loading up saved emails
 
-    var emailToAdd = $(this).data('email');
-    var url = "/api/search/" + encodedEmail;
-    console.log("url", url);
-    console.log("emailtoadd", emailToAdd);
-    $.post(url).done(function(htmlResponse) {
-      console.log(htmlResponse);
-    });
+  console.log("yo");
+  $(".toggle").click(function() {
+    // $('.').toggleClass('transform-active');
+    $("div.box").toggleClass("hide");
+    // $("div.four").toggleClass("hide")
+    // $("div.input-group").toggleClass("remove")
   });
 });
