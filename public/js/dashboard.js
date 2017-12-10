@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  console.log("hello");
+  console.log("Dashboard JS loaded");
   $(".drawer-pf-trigger").click(function() {
     var $drawer = $(".drawer-pf");
 
