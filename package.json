@@ -1,10 +1,10 @@
 {
-  "name": "logdna-v-donny",
+  "name": "lead-generator",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start":"node server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
