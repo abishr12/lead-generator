@@ -4,18 +4,19 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start":"node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/donaldvallejo/logDNA-v-donny.git"
+    "url": "git@github.com:abishr12/lead-generator.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/donaldvallejo/logDNA-v-donny/issues"
+    "url": "https://github.com/abishr12/lead-generator/issues"
   },
-  "homepage": "https://github.com/donaldvallejo/logDNA-v-donny#readme",
+  "homepage": "https://github.com/abishr12/lead-generator#readme",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
