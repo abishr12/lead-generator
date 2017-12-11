@@ -43,8 +43,9 @@ router.get("/api/savedsearch/:email", (req, res) => {
 });
 
 //Clearbit API search
-router.get("/api/search/:email", (req, res) => {
+router.get("/api/search/:email/:userId", (req, res) => {
   emailSearch = req.params.email;
+  userId = req.params.userId;
 
   if (validateEmail(emailSearch)) {
     clearbitSearch(emailSearch, function(data) {

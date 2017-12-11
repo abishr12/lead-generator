@@ -23,6 +23,12 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: true
       }
     });
+
+    Target.belongsTo(models.user, {
+      foreignKey: {
+        allowNull: true
+      }
+    });
   };
   return Target;
 };

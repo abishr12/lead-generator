@@ -50,7 +50,8 @@ const tableCreate = (data, userId) => {
           twitterHandle: data.target.twitterHandle,
           location: data.target.location,
           biography: data.target.biography,
-          CompanyId: result[0].dataValues.id
+          CompanyId: result[0].dataValues.id,
+          userId: userId
         }
       }).catch(function(err) {
         // Whenever a validation or flag fails, an error is thrown
