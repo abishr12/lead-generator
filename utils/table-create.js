@@ -2,7 +2,7 @@
 var db = require("../models/index.js");
 
 //Create Sequelize tables
-const tableCreate = data => {
+const tableCreate = (data, userId) => {
   //Creating Company Table
   db.Company.findOrCreate({
     where: {
@@ -21,7 +21,6 @@ const tableCreate = data => {
   })
     .then(result => {
       //Creating the Email Table
-
       for (var i = 0; i < data.company.companyEmails.length; i++) {
         db.CompanyEmail.findOrCreate({
           where: {
@@ -56,7 +55,7 @@ const tableCreate = data => {
       }).catch(function(err) {
         // Whenever a validation or flag fails, an error is thrown
         // We can "catch" the error to prevent it from being "thrown", which could crash our node app
-        res.json(err);
+        throw err;
       });
     })
     .catch(function(err) {

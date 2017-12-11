@@ -36,7 +36,7 @@ const exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-const routes = require("./routes/routes.js");
+const routes = require("./controllers/controllers.js");
 app.use("/", routes);
 
 //Creating sequelize database
