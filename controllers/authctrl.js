@@ -12,8 +12,14 @@ module.exports.dashboard = function(req, res) {
   let user_info = req.user;
 
   //Finds all targets associated with a particular user (using their user id)
-  db.Target.findAll({}).then(targets => {
+  db.Target.findAll({
+    where: {
+      userId: user_info.id
+    }
+  }).then(targets => {
     console.log(targets);
+
+    //Renders dashboard page with information about targets searched for and
     res.render("dashboard", {
       user_id: user_info.id,
       first_name: user_info.firstname,
