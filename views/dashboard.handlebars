@@ -16,7 +16,7 @@
 		<ul class="nav navbar-nav navbar-right navbar-iconic">
 			<form class="navbar-form navbar-left" method="get" id="searchform" action="http://www.google.com/search">
 				<div class="form-group">
-					<input name="q" id="q" class="form-control" autocomplete="off" placeholder="Search" type="text">
+					<input name="emailSearch" id="emailSearch" class="form-control" autocomplete="off" placeholder="Search" type="text">
 					<input name="sitesearch" value="patternfly.org" type="hidden">
 					<button type="submit" class="btn btn-default">Search</button>
 				</div>
@@ -46,7 +46,7 @@
 		<li class="list-group-item">
 			<a>
 				<span class="fa fa-dashboard" data-toggle="tooltip" title="Dashboard"></span>
-				<span class="list-group-item-value">{{this.name}}</span>
+				<span  class="saved_target" target= {{this.name}}>{{this.name}}</span>
 			</a>
 		</li>
 		{{/each}}

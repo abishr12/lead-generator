@@ -1,9 +1,33 @@
 $(document).ready(function() {
   console.log("Dashboard JS loaded");
-  userId = $("#Username").attr("user_id");
 
-  console.log("User id --->", userId);
+  //API requests
 
+  const userId = $("#Username").attr("user_id");
+
+  //console.log("User id --->", userId);
+
+  $("#searchform").on("submit", event => {
+    //Prevent accidental submission
+    event.preventDefault();
+
+    let emailInput = $("#emailSearch")
+      .val()
+      .trim();
+
+    console.log(emailInput);
+
+    URL = "/api/search/";
+    URL += emailInput;
+    URL += "/";
+    URL += userId;
+
+    $.get(URL).done(response => {
+      console.log(response);
+    });
+  });
+
+  //Animation events
   $(".drawer-pf-trigger").click(function() {
     var $drawer = $(".drawer-pf");
 
