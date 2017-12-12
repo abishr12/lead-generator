@@ -1,5 +1,9 @@
 $(document).ready(function() {
   console.log("Dashboard JS loaded");
+  userId = $("#Username").attr("user_id");
+
+  console.log("User id --->", userId);
+
   $(".drawer-pf-trigger").click(function() {
     var $drawer = $(".drawer-pf");
 

@@ -22,9 +22,9 @@
 				</div>
 			</form>
 			<li class="dropdown">
-				<a href="#0" class="dropdown-toggle nav-item-iconic" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					<span title="Username" class="fa pficon-user"></span>
-					{{ first_name}} {{last_name}}
+				<a class="dropdown-toggle nav-item-iconic" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					<span id= "Username" title="Username" class="fa pficon-user" user_id = {{user_id}}></span>
+					{{first_name}} {{last_name}}
 					<span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -44,7 +44,7 @@
 	<ul class="list-group">
 		{{#each targets}}
 		<li class="list-group-item">
-			<a href="#0">
+			<a>
 				<span class="fa fa-dashboard" data-toggle="tooltip" title="Dashboard"></span>
 				<span class="list-group-item-value">{{this.name}}</span>
 			</a>

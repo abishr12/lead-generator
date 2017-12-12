@@ -17,7 +17,7 @@ module.exports.dashboard = function(req, res) {
       userId: user_info.id
     }
   }).then(targets => {
-    console.log(targets);
+    //console.log(targets);
 
     //Renders dashboard page with information about targets searched for and
     res.render("dashboard", {

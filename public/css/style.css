@@ -3,9 +3,10 @@
 }
 
 .navbar-inverse .navbar-brand {
-   color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
-.placeholders table, .placeholders h2 {
+.placeholders table,
+.placeholders h2 {
   text-align: left;
 }
