@@ -42,31 +42,14 @@
 <div class="nav-pf-vertical nav-pf-vertical-with-sub-menus
      nav-pf-persistent-secondary hidden-icons-pf">
 	<ul class="list-group">
+		{{#each targets}}
 		<li class="list-group-item">
 			<a href="#0">
 				<span class="fa fa-dashboard" data-toggle="tooltip" title="Dashboard"></span>
-				<span class="list-group-item-value">Adham Bishr</span>
+				<span class="list-group-item-value">{{this.name}}</span>
 			</a>
 		</li>
-		<li class="list-group-item">
-			<a href="#0">
-				<span class="fa fa-shield" data-toggle="tooltip" title="Dolor"></span>
-				<span class="list-group-item-value">Donald Vallejo</span>
-
-			</a>
-		</li>
-		<li class="list-group-item">
-			<a href="#0">
-				<span class="fa fa-graduation-cap" data-toggle="tooltip" title="Adipscing"></span>
-				<span class="list-group-item-value">Jeff Lowy</span>
-			</a>
-		</li>
-		<li class="list-group-item">
-			<a href="#0">
-				<span class="fa fa-gamepad" data-toggle="tooltip" title="Lorem"></span>
-				<span class="list-group-item-value">Dani Roxberry</span>
-			</a>
-		</li>
+		{{/each}}
 	</ul>
 
 </div>

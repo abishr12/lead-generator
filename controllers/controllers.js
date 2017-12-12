@@ -30,6 +30,7 @@ router.get("/api/savedsearch/:email", (req, res) => {
             companyEmailsList.push(companyEmailData[i].dataValues.email);
           }
 
+          //Return JSON object with target's information
           let resObject = {
             target: targetData,
             company: companyData.dataValues,
@@ -42,15 +43,16 @@ router.get("/api/savedsearch/:email", (req, res) => {
   });
 });
 
-//Clearbit API search
+//Clearbit API search with unique user Id
 router.get("/api/search/:email/:userId", (req, res) => {
   emailSearch = req.params.email;
   userId = req.params.userId;
 
+  // Validate email is actually an email, otherwise throw an error
   if (validateEmail(emailSearch)) {
     clearbitSearch(emailSearch, function(data) {
       res.json(data);
-      tableCreate(data);
+      tableCreate(data, userId);
     });
   } else {
     throw Error("Invalid Email");
