@@ -3,7 +3,7 @@ $(document).ready(function() {
 
   //API requests
 
-  const userId = $("#Username").attr("user_id");
+  const userId = $("#Username").attr("data-user_id");
 
   //console.log("User id --->", userId);
 
