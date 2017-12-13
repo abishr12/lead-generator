@@ -16,15 +16,15 @@
 		<ul class="nav navbar-nav navbar-right navbar-iconic">
 			<form class="navbar-form navbar-left" method="get" id="searchform" action="http://www.google.com/search">
 				<div class="form-group">
-					<input name="q" id="q" class="form-control" autocomplete="off" placeholder="Search" type="text">
+					<input name="emailSearch" id="emailSearch" class="form-control" autocomplete="off" placeholder="Search" type="text">
 					<input name="sitesearch" value="patternfly.org" type="hidden">
 					<button type="submit" class="btn btn-default">Search</button>
 				</div>
 			</form>
 			<li class="dropdown">
-				<a href="#0" class="dropdown-toggle nav-item-iconic" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					<span title="Username" class="fa pficon-user"></span>
-					{{ first_name}} {{last_name}}
+				<a class="dropdown-toggle nav-item-iconic" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					<span id= "Username" title="Username" class="fa pficon-user" data-user_id = {{user_id}}></span>
+					{{first_name}} {{last_name}}
 					<span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -41,32 +41,10 @@
 
 <div class="nav-pf-vertical nav-pf-vertical-with-sub-menus
      nav-pf-persistent-secondary hidden-icons-pf">
-	<ul class="list-group">
-		<li class="list-group-item">
-			<a href="#0">
-				<span class="fa fa-dashboard" data-toggle="tooltip" title="Dashboard"></span>
-				<span class="list-group-item-value">Adham Bishr</span>
-			</a>
-		</li>
-		<li class="list-group-item">
-			<a href="#0">
-				<span class="fa fa-shield" data-toggle="tooltip" title="Dolor"></span>
-				<span class="list-group-item-value">Donald Vallejo</span>
-
-			</a>
-		</li>
-		<li class="list-group-item">
-			<a href="#0">
-				<span class="fa fa-graduation-cap" data-toggle="tooltip" title="Adipscing"></span>
-				<span class="list-group-item-value">Jeff Lowy</span>
-			</a>
-		</li>
-		<li class="list-group-item">
-			<a href="#0">
-				<span class="fa fa-gamepad" data-toggle="tooltip" title="Lorem"></span>
-				<span class="list-group-item-value">Dani Roxberry</span>
-			</a>
-		</li>
+	<ul id="searched-names" class="list-group">
+		{{#each targets}}
+			{{> sidebars/sidebar_element}}
+		{{/each}}
 	</ul>
 
 </div>

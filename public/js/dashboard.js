@@ -1,5 +1,35 @@
 $(document).ready(function() {
   console.log("Dashboard JS loaded");
+
+  //API requests
+
+  const userId = $("#Username").attr("data-user_id");
+
+  //console.log("User id --->", userId);
+
+  $("#searchform").on("submit", event => {
+    //Prevent accidental submission
+    event.preventDefault();
+
+    let emailInput = $("#emailSearch")
+      .val()
+      .trim();
+
+    console.log(emailInput);
+
+    URL = "/api/search/";
+    URL += emailInput;
+    URL += "/";
+    URL += userId;
+
+    $.get(URL).done(response => {
+      console.log(response);
+
+      //prepend to the partial
+    });
+  });
+
+  //Animation events
   $(".drawer-pf-trigger").click(function() {
     var $drawer = $(".drawer-pf");
 
