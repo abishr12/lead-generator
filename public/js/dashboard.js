@@ -24,6 +24,8 @@ $(document).ready(function() {
 
     $.get(URL).done(response => {
       console.log(response);
+
+      //prepend to the partial
     });
   });
 

@@ -15,7 +15,8 @@ module.exports.dashboard = function(req, res) {
   db.Target.findAll({
     where: {
       userId: user_info.id
-    }
+    },
+    order: [["createdAt", "DESC"]]
   }).then(targets => {
     //console.log(targets);
 
