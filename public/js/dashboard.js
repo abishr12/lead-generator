@@ -1,11 +1,15 @@
 $(document).ready(function() {
   console.log("Dashboard JS loaded");
 
+  // $("input").focus(function() {
+  //   $("span")
+  //     .css("display", "inline")
+  //     .fadeOut(2000);
+  // });
+
   //API requests
 
   const userId = $("#Username").attr("data-user_id");
-
-  //console.log("User id --->", userId);
 
   $("#searchform").on("submit", event => {
     //Prevent accidental submission
@@ -25,7 +29,13 @@ $(document).ready(function() {
     $.get(URL).done(response => {
       console.log(response);
 
-      //prepend to the partial
+      // Convert the renderedPartial String to a jQuery object.
+      let newTarget = $(response.renderedPartial);
+
+      console.log(newTarget);
+
+      //Add to the emails side bar with prepend()
+      $("#searched-names").prepend(newTarget);
     });
   });
 

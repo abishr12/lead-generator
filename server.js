@@ -5,8 +5,10 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const models = require("./models");
 const methodOverride = require("method-override");
+const fs = require("fs");
 const PORT = process.env.PORT || 3000;
-
+const snippetsDirectory = "./views/snippets/";
+const hbs = require("handlebars");
 const app = express();
 
 // Requiring our models for syncing
@@ -32,6 +34,20 @@ app.use(passport.session()); // persistent login sessions
 //Using handlebars
 app.use(methodOverride("_method"));
 const exphbs = require("express-handlebars");
+
+/** Create handlebars partials for each item in /views/snippets. */
+fs.readdirSync(snippetsDirectory).forEach(function(snippet) {
+  var fileContents = fs.readFileSync(snippetsDirectory + snippet, "utf8");
+  var compiledTemplate = hbs.compile(fileContents);
+  var slug = snippet.replace(".handlebars", "");
+  hbs.registerPartial(slug, compiledTemplate);
+});
+
+/** Create 'showSnippet' helper that acts as a dynamic partial. */
+hbs.registerHelper("showSnippet", function(slug, context, opts) {
+  var loadedPartial = hbs.partials[slug];
+  return new hbs.SafeString(loadedPartial(context));
+});
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");

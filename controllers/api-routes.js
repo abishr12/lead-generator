@@ -3,6 +3,7 @@ var router = express.Router();
 var clearbitSearch = require("../utils/clearbit-search");
 var tableCreate = require("../utils/table-create");
 var validateEmail = require("../utils/validate-Email");
+const hbs = require("handlebars");
 var db = require("../models/index.js");
 
 // Require auth controller and passport.js module
@@ -51,8 +52,24 @@ router.get("/api/search/:email/:userId", (req, res) => {
   // Validate email is actually an email, otherwise throw an error
   if (validateEmail(emailSearch)) {
     clearbitSearch(emailSearch, function(data) {
-      res.json(data);
       tableCreate(data, userId);
+
+      let loadedPartial = hbs.partials["sidebar-element"];
+      if (!loadedPartial) {
+        return res.status(404).json({
+          error: "Snippet not found."
+        });
+      }
+
+      // /** Render the partial. */
+      let renderedPartial = loadedPartial(data.target);
+
+      let responseObject = {
+        data: data,
+        renderedPartial: renderedPartial
+      };
+
+      res.json(responseObject);
     });
   } else {
     throw Error("Invalid Email");
