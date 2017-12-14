@@ -1,12 +1,68 @@
+body.cards-pf {
+  background-color: #fff;
+}
+
 .navbar-inverse {
   background: #172f47 !important;
 }
 
 .navbar-inverse .navbar-brand {
-  color: #ffffff !important;
+  color: #fff !important;
 }
 
 .placeholders table,
 .placeholders h2 {
   text-align: left;
 }
+
+div.row-contact-search {
+  padding: 15px 30px;
+}
+
+div.row-contact-search input[type="text"] {
+  width: 99%;
+  padding: 2px 16px;
+  height: 60px;
+  font-size: 32px;
+}
+
+div.row-contact-search button[type="submit"] {
+  width: 90px;
+  height: 54px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  font-size: 32px;
+}
+
+div.row-contact-search div.input-group-addon {
+  padding: 0;
+  width: 90px !important;
+}
+
+div.row-contact-search div.input-group-addon:hover {
+  background-color: #39a5dc;
+  color: white;
+}
+
+div.row-contact-search div.input-group,
+div.row-contact-search div.form-group {
+  width: 100%;
+}
+
+
+/* ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding-left: 16px;
+}
+
+li:before {
+  content: "•";
+  padding-right: 8px;
+  color: blue;
+} */
