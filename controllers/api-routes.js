@@ -100,9 +100,9 @@ router.put("/api/save/:email", (req, res) => {
 // ROUTES FOR USER AUTH
 router.get("/", authctrl.login);
 router.get("/login", authctrl.login);
-router.get("/signup", authctrl.signup);
+router.get("/signup", authctrl.login);
 router.get("/signin", authctrl.signin);
-router.get("/logout", authctrl.logout);
+router.get("/logout", authctrl.login);
 router.get("/dashboard", isLoggedIn, authctrl.dashboard);
 
 // Load passport strategies from config
