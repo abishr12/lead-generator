@@ -52,27 +52,24 @@ router.get("/api/search/:email/:userId", (req, res) => {
   // Validate email is actually an email, otherwise throw an error
   if (validateEmail(emailSearch)) {
     clearbitSearch(emailSearch, function(data) {
-      res.json(data);
       tableCreate(data, userId);
 
-      // var loadedPartial = hbs.partials["listitem"];
-      // if (!loadedPartial) {
-      //   return res.status(404).json({
-      //     error: "Snippet not found."
-      //   });
-      // }
-      //
-      // /** Save the POST body in a new object and add it to employeeData. */
-      // var newEmployee = {
-      //   name: req.body.username,
-      //   role: req.body.role,
-      //   company: req.body.company
-      // };
-      //
-      // employeeData.push(newEmployee);
-      //
+      let loadedPartial = hbs.partials["sidebar-element"];
+      if (!loadedPartial) {
+        return res.status(404).json({
+          error: "Snippet not found."
+        });
+      }
+
       // /** Render the partial. */
-      // res.send(loadedPartial(newEmployee));
+      let renderedPartial = loadedPartial(data.target);
+
+      let responseObject = {
+        data: data,
+        renderedPartial: renderedPartial
+      };
+
+      res.json(responseObject);
     });
   } else {
     throw Error("Invalid Email");

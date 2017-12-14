@@ -29,17 +29,13 @@ $(document).ready(function() {
     $.get(URL).done(response => {
       console.log(response);
 
-      let newTarget = {
-        name: response.target.name
-      };
+      // Convert the renderedPartial String to a jQuery object.
+      let newTarget = $(response.renderedPartial);
 
       console.log(newTarget);
 
-      // Convert the renderedPartial String to a jQuery object.
-      let newTargetListItem = $(newTarget);
-
       //Add to the emails side bar with prepend()
-      $("#searched-names").prepend(newTargetListItem);
+      $("#searched-names").prepend(newTarget);
     });
   });
 
