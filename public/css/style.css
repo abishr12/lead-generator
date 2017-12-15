@@ -1,3 +1,37 @@
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    border:0px;
+    transform: translate3d(0, -100%, 0);
+  }
+  to {
+    opacity: 1;
+    border:1px;
+    transform: none;
+  }
+}
+
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fadeInDown {
+  animation: .4s 1 fadeInDown;
+}
+
+.fadeInUp {
+  animation: .7s 1 fadeInUp;
+}
+
+
 body.cards-pf {
   background-color: #fff;
 }
