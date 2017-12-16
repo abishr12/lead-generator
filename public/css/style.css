@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Source+Sans+Pro');
 @keyframes fadeInDown {
   from {
     opacity: 0;
@@ -32,6 +33,7 @@
 
 body.cards-pf {
   background-color: #fff;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 .navbar-inverse {
@@ -51,11 +53,12 @@ div.row-contact-search {
   padding: 15px 30px;
 }
 
-div.row-contact-search input[type="text"] {
+div.row-contact-search input[type="email"] {
   width: 99%;
   padding: 2px 16px;
   height: 60px;
   font-size: 32px;
+  font-family: 'Roboto', sans-serif;
 }
 
 div.row-contact-search button[type="submit"] {
@@ -86,12 +89,12 @@ nav img#logo {
   height: 32px;
 }
 
-.nav-pf-vertical .list-group-item.active > a {
+.nav-pf-vertical .list-group-item.active>a {
   background-color: #0b6fc3;
 }
 
 span.fa.fa-dashboard[data-toggle="tooltip"] {
- display: none;
+  display: none;
 }
 
 i.fa.fa-power-off {
