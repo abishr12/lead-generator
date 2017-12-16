@@ -1,7 +1,30 @@
 <div class="nav-pf-vertical nav-pf-vertical-with-sub-menus
      nav-pf-persistent-secondary hidden-icons-pf">
 	<ul id="searched-names" class="list-group">
-		{{#each targets}} {{showSnippet 'sidebar-element' this}} {{/each}}
+		<li class="list-group-item secondary-nav-item-pf active" data-target="#ipsum-secondary">
+			<a href="#0">
+				<span class="fa fa-space-shuttle" data-toggle="tooltip" title="" data-original-title="Ipsum"></span>
+				<span class="list-group-item-value"><i class="fa fa-power-off" aria-hidden="true"></i> Settings</span>
+			</a>
+
+			<div id="-secondary" class="nav-pf-secondary-nav">
+				<div class="nav-item-pf-header">
+					<a href="#0" class="secondary-collapse-toggle-pf" data-toggle="collapse-secondary-nav"></a>
+					<span id="Username" data-user_id={{user_id}}>{{first_name}} {{last_name}}</span>
+				</div>
+				<ul class="list-group">
+					<li class="list-group-item active" data-target="#ipsum-intellegam-tertiary">
+						<a href="/logout">
+							<span class="list-group-item-value">Logout</span>
+						</a>
+
+					</li>
+				</ul>
+			</div>
+		</li>
+		<span id="saved-targets">
+			{{#each targets}} {{showSnippet 'sidebar-element' this}} {{/each}}
+		</span>
 	</ul>
 
 </div>
