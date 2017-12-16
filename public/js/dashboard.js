@@ -15,6 +15,9 @@ $(document).ready(function () {
 
     let URL = `/api/search/${emailInput}/${userId}`;
 
+    // Clear the email search field and display the loading icon.
+    loader()
+
     $.get(URL).done((response) => {
       console.log(response);
       // Convert the renderedPartial String to a jQuery object.
@@ -24,6 +27,8 @@ $(document).ready(function () {
       newTarget.addClass("fadeInDown");
       //Add to the emails side bar with prepend()
       $("span#saved-targets").prepend(newTarget);
+      // Load the new target's information
+      getSavedTartget(emailInput, renderPanels);
     });
   });
 
@@ -85,7 +90,7 @@ $(document).ready(function () {
     }
     if (targetResponse.target.location) {
       targetHTML +=
-      `<button type="button" class="list-group-item">
+        `<button type="button" class="list-group-item">
         <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;${targetResponse.target.location}
       </button>`
     }
@@ -101,7 +106,7 @@ $(document).ready(function () {
     // Build HTML block based on information available in company record
     if (targetResponse.company.companyName) {
       companyHTML +=
-      `<button type="button" class="list-group-item">${targetResponse.company.companyName}</button>`
+        `<button type="button" class="list-group-item">${targetResponse.company.companyName}</button>`
     }
     if (targetResponse.company.companyFounded) {
       companyHTML += `<button type="button" class="list-group-item">Est. ${targetResponse.company.companyFounded}</button>`
@@ -120,7 +125,7 @@ $(document).ready(function () {
     <div class="col-xs-12 col-sm-8 col-md-8 fadeInUp">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3 class="panel-title">Lead Information</h3>
+					<h3 class="panel-title">${targetResponse.target.name}</h3>
 				</div>
 				<div class="panel-body">
           <div class="list-group">
@@ -142,5 +147,30 @@ $(document).ready(function () {
 			</div>
 		</div>
     `);
+  }
+
+  function loader() {
+    $("emailSearch").val("");
+    $("#contact-area").html("");
+    $("#contact-area").html(
+      `
+      <div class="loader">
+      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			 width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+				<rect x="0" y="0" width="4" height="10" fill="#0b6fc3">
+					<animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0" dur="0.6s"
+					 repeatCount="indefinite" />
+				</rect>
+				<rect x="10" y="0" width="4" height="10" fill="#0b6fc3">
+					<animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0.2s" dur="0.6s"
+					 repeatCount="indefinite" />
+				</rect>
+				<rect x="20" y="0" width="4" height="10" fill="#0b6fc3">
+					<animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0.4s" dur="0.6s"
+					 repeatCount="indefinite" />
+				</rect>
+      </svg>
+      </div>
+      `);
   }
 });

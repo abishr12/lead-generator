@@ -8,6 +8,11 @@
 	.st2{fill:#0393FF;}
 	.st3{fill:#0387FF;}
 	.st4{fill:#FFFFFF;}
+	@media screen and (max-width: 481px) {
+		path {
+			fill:red;
+		}
+	}
 </style>
 <title>leadgen_logo</title>
 <polygon id="long_side" class="st0" points="177.5,0 0,347.8 46.4,434.6 269.5,0 "/>

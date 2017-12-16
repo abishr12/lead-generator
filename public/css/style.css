@@ -114,6 +114,10 @@ button.list-group-item {
   font-size: 14px;
 }
 
+div.loader {
+  width: 10%;
+  margin: 200px auto 0 auto;
+}
 
 /* ul {
   list-style: none;
