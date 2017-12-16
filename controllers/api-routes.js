@@ -112,7 +112,7 @@ router.post(
   "/signup",
   passport.authenticate("local-signup", {
     successRedirect: "/dashboard",
-    failureRedirect: "/signup"
+    failureRedirect: "/login"
   })
 );
 
@@ -120,7 +120,7 @@ router.post(
   "/signin",
   passport.authenticate("local-signin", {
     successRedirect: "/dashboard",
-    failureRedirect: "/signin"
+    failureRedirect: "/login"
   })
 );
 
@@ -128,7 +128,7 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect("/signin");
+  res.redirect("/login");
 }
 
 module.exports = router;
