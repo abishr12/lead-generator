@@ -11,7 +11,6 @@ $(document).ready(function () {
 
     // Trim and store value entered by user in the search field
     let emailInput = $("#emailSearch").val().trim();
-    console.log(emailInput);
 
     let URL = `/api/search/${emailInput}/${userId}`;
 
@@ -19,14 +18,22 @@ $(document).ready(function () {
     loader()
 
     $.get(URL).done((response) => {
-      console.log(response);
       // Convert the renderedPartial String to a jQuery object.
       let newTarget = $(response.renderedPartial);
-      console.log(newTarget);
 
       newTarget.addClass("fadeInDown");
+
+      // Adding an event listener to detect when the fadeInDown animation is complete
+      // newTarget is an array. newTarget[0] is the <li> just created
+      // This prevents the fadeInDown CSS animation from looping when the sidebar is opened and closed
+      newTarget[0].addEventListener("animationend", function () {
+        // When an arrow function is used, 'this' is the global object
+        $(this).removeClass('fadeInDown');
+      });
+
       //Add to the emails side bar with prepend()
       $("span#saved-targets").prepend(newTarget);
+
       // Load the new target's information
       getSavedTartget(emailInput, renderPanels);
     });
@@ -54,68 +61,63 @@ $(document).ready(function () {
     getSavedTartget(targetEmailAddress, renderPanels);
   });
 
-  function getSavedTartget(targetEmail, callback) {
+  function getSavedTartget(targetEmail, render) {
     $.get(`api/savedsearch/${targetEmail}`).done((targetResponse) => {
-      callback(targetResponse);
+      render(targetResponse);
     });
   }
 
+  // Build the panel/card that contains the target and company information
   function renderPanels(targetResponse) {
 
     let targetHTML = ``;
     let companyHTML = ``;
 
+
     // Build HTML block based on information available in target record
-    if (targetResponse.target.name) {
-      targetHTML +=
-        `<button type="button" class="list-group-item">
-        <i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;${targetResponse.target.name}
-      </button>`
-    }
     if (targetResponse.target.employmentTitle) {
-      targetHTML += `<button type="button" class="list-group-item"><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;${targetResponse.target.employmentTitle}</button>`
-    } else {
-      targetHTML += `<button type="button" class="list-group-item">Job title not available</button>`
+      targetHTML +=
+        `<a class="list-group-item"><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;${targetResponse.target.employmentTitle || "Job title not available"} | ${targetResponse.company.companyName || "Company not available"}
+        </a>`;
     }
     if (targetResponse.target.email) {
-      targetHTML += `<a href="mailto:${targetResponse.target.email}"><button type="button" class="list-group-item">
-        <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;${targetResponse.target.email}
-      </button></a>`
+      targetHTML +=
+        `<a href="mailto:${targetResponse.target.email}" class="list-group-item">
+          <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;${targetResponse.target.email}
+        </a>`;
     }
     if (targetResponse.target.linkedInURL) {
       targetHTML +=
-        `<button href="${targetResponse.target.linkedInURL}" target="_blank" type="button" class="list-group-item" >
+        `<a href="${targetResponse.target.linkedInURL}" target="_blank" class="list-group-item" >
           <i class="fa fa-linkedin-square" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;LinkedIn Profile
-        </button>`
+        </a>`;
     }
     if (targetResponse.target.location) {
       targetHTML +=
-        `<button type="button" class="list-group-item">
-        <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;${targetResponse.target.location}
-      </button>`
+        `<a class="list-group-item">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;${targetResponse.target.location}
+        </a>`;
     }
     if (targetResponse.target.twitterHandle) {
       targetHTML +=
-        `<a href="https://www.twitter.com/${targetResponse.target.twitterHandle}" target="_blank">
-          <button type="button" class="list-group-item" >
+        `<a href="https://www.twitter.com/${targetResponse.target.twitterHandle}" target="_blank" class="list-group-item" >
             <i class="fa fa-twitter" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;@${targetResponse.target.twitterHandle}
-          </button>
-      </a>`
+        </a>`;
     }
 
     // Build HTML block based on information available in company record
     if (targetResponse.company.companyName) {
       companyHTML +=
-        `<button type="button" class="list-group-item">${targetResponse.company.companyName}</button>`
+        `<a class="list-group-item">${targetResponse.company.companyName}</a>`
     }
     if (targetResponse.company.companyFounded) {
-      companyHTML += `<button type="button" class="list-group-item">Est. ${targetResponse.company.companyFounded}</button>`
+      companyHTML += `<a class="list-group-item">Est. ${targetResponse.company.companyFounded}</a>`
     }
     if (targetResponse.company.companyURL) {
       companyHTML +=
-        `<a href="${targetResponse.company.companyURL}" target="_blank">
-        <button type="button" class="list-group-item">${targetResponse.company.companyURL}</button>
-      </a>`
+        `<a href="${targetResponse.company.companyURL}" target="_blank" class="list-group-item">
+          ${targetResponse.company.companyURL}</button>
+        </a>`
     }
 
     // Clear the currently selected target
@@ -125,7 +127,8 @@ $(document).ready(function () {
     <div class="col-xs-12 col-sm-8 col-md-8 fadeInUp">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3 class="panel-title">${targetResponse.target.name}</h3>
+          <h3 class="panel-title" style="display:inline-block">${targetResponse.target.name}</h3>
+          <a href="#"><i class="glyphicon glyphicon-floppy-save pull-right"></i></a>
 				</div>
 				<div class="panel-body">
           <div class="list-group">

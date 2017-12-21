@@ -86,7 +86,8 @@ div.row-contact-search div.form-group {
 }
 
 nav img#logo {
-  height: 32px;
+  margin-top: 6px;
+  height: 24px;
 }
 
 .nav-pf-vertical .list-group-item.active>a {
@@ -107,10 +108,10 @@ div.panel-primary>.panel-heading {
 }
 
 h3.panel-title {
-  font-size: 16px;
+  font-size: 24px;
 }
 
-button.list-group-item {
+a.list-group-item {
   font-size: 14px;
 }
 
@@ -118,6 +119,12 @@ div.loader {
   width: 10%;
   margin: 200px auto 0 auto;
 }
+
+div.panel-heading i.glyphicon-floppy-save {
+  color: white;
+  font-size: 24px;
+}
+
 
 /* ul {
   list-style: none;
