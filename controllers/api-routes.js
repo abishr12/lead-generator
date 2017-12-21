@@ -100,9 +100,9 @@ router.put("/api/save/:email", (req, res) => {
 // ROUTES FOR USER AUTH
 router.get("/", authctrl.login);
 router.get("/login", authctrl.login);
-router.get("/signup", authctrl.signup);
+router.get("/signup", authctrl.login);
 router.get("/signin", authctrl.signin);
-router.get("/logout", authctrl.logout);
+router.get("/logout", authctrl.login);
 router.get("/dashboard", isLoggedIn, authctrl.dashboard);
 
 // Load passport strategies from config
@@ -112,7 +112,7 @@ router.post(
   "/signup",
   passport.authenticate("local-signup", {
     successRedirect: "/dashboard",
-    failureRedirect: "/signup"
+    failureRedirect: "/login"
   })
 );
 
@@ -120,7 +120,7 @@ router.post(
   "/signin",
   passport.authenticate("local-signin", {
     successRedirect: "/dashboard",
-    failureRedirect: "/signin"
+    failureRedirect: "/login"
   })
 );
 
@@ -128,7 +128,7 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect("/signin");
+  res.redirect("/login");
 }
 
 module.exports = router;

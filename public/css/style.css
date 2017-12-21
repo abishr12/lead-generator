@@ -1,12 +1,143 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Source+Sans+Pro');
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    border: 0px;
+    transform: translate3d(0, -100%, 0);
+  }
+  to {
+    opacity: 1;
+    border: 1px;
+    transform: none;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fadeInDown {
+  animation: .4s 1 fadeInDown;
+}
+
+.fadeInUp {
+  animation: .7s 1 fadeInUp;
+}
+
+body.cards-pf {
+  background-color: #fff;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
 .navbar-inverse {
   background: #172f47 !important;
 }
 
 .navbar-inverse .navbar-brand {
-  color: #ffffff !important;
+  color: #fff !important;
 }
 
 .placeholders table,
 .placeholders h2 {
   text-align: left;
 }
+
+div.row-contact-search {
+  padding: 15px 30px;
+}
+
+div.row-contact-search input[type="email"] {
+  width: 99%;
+  padding: 2px 16px;
+  height: 60px;
+  font-size: 32px;
+  font-family: 'Roboto', sans-serif;
+}
+
+div.row-contact-search button[type="submit"] {
+  width: 90px;
+  height: 54px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  font-size: 32px;
+}
+
+div.row-contact-search div.input-group-addon {
+  padding: 0;
+  width: 90px !important;
+}
+
+div.row-contact-search div.input-group-addon:hover {
+  background-color: #39a5dc;
+  color: white;
+}
+
+div.row-contact-search div.input-group,
+div.row-contact-search div.form-group {
+  width: 100%;
+}
+
+nav img#logo {
+  margin-top: 6px;
+  height: 24px;
+}
+
+.nav-pf-vertical .list-group-item.active>a {
+  background-color: #0b6fc3;
+}
+
+span.fa.fa-dashboard[data-toggle="tooltip"] {
+  display: none;
+}
+
+i.fa.fa-power-off {
+  display: inline !important;
+}
+
+div.panel-primary>.panel-heading {
+  background-color: #0b6fc3;
+  border-color: #0b6fc3;
+}
+
+h3.panel-title {
+  font-size: 24px;
+}
+
+a.list-group-item {
+  font-size: 14px;
+}
+
+div.loader {
+  width: 10%;
+  margin: 200px auto 0 auto;
+}
+
+div.panel-heading i.glyphicon-floppy-save {
+  color: white;
+  font-size: 24px;
+}
+
+
+/* ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding-left: 16px;
+}
+
+li:before {
+  content: "•";
+  padding-right: 8px;
+  color: blue;
+} */

@@ -1,160 +1,179 @@
-$(document).ready(function() {
+$(document).ready(function () {
   console.log("Dashboard JS loaded");
 
-  // $("input").focus(function() {
-  //   $("span")
-  //     .css("display", "inline")
-  //     .fadeOut(2000);
-  // });
-
-  //API requests
-
+  // Capture user's ID number
   const userId = $("#Username").attr("data-user_id");
 
-  $("#searchform").on("submit", event => {
-    //Prevent accidental submission
+  $("#searchform").on("submit", (event) => {
+
+    //Prevent normal browser behavior
     event.preventDefault();
 
-    let emailInput = $("#emailSearch")
-      .val()
-      .trim();
+    // Trim and store value entered by user in the search field
+    let emailInput = $("#emailSearch").val().trim();
 
-    console.log(emailInput);
+    let URL = `/api/search/${emailInput}/${userId}`;
 
-    URL = "/api/search/";
-    URL += emailInput;
-    URL += "/";
-    URL += userId;
+    // Clear the email search field and display the loading icon.
+    loader()
 
-    $.get(URL).done(response => {
-      console.log(response);
-
+    $.get(URL).done((response) => {
       // Convert the renderedPartial String to a jQuery object.
       let newTarget = $(response.renderedPartial);
 
-      console.log(newTarget);
+      newTarget.addClass("fadeInDown");
+
+      // Adding an event listener to detect when the fadeInDown animation is complete
+      // newTarget is an array. newTarget[0] is the <li> just created
+      // This prevents the fadeInDown CSS animation from looping when the sidebar is opened and closed
+      newTarget[0].addEventListener("animationend", function () {
+        // When an arrow function is used, 'this' is the global object
+        $(this).removeClass('fadeInDown');
+      });
 
       //Add to the emails side bar with prepend()
-      $("#searched-names").prepend(newTarget);
+      $("span#saved-targets").prepend(newTarget);
+
+      // Load the new target's information
+      getSavedTartget(emailInput, renderPanels);
     });
   });
 
-  //Animation events
-  $(".drawer-pf-trigger").click(function() {
-    var $drawer = $(".drawer-pf");
+  // Remove patternfly.min.js behavior
+  // Without this, the click handler below will silently fail and click on the contacts do not work
+  $("li.list-group-item").off("click");
 
-    $(this).toggleClass("open");
-    if ($drawer.hasClass("hide")) {
-      $drawer.removeClass("hide");
-      setTimeout(function() {
-        if (window.dispatchEvent) {
-          window.dispatchEvent(new Event("resize"));
-        }
-        // Special case for IE
-        if ($(document).fireEvent) {
-          $(document).fireEvent("onresize");
-        }
-      }, 100);
-    } else {
-      $drawer.addClass("hide");
-    }
-    // Special case, close navigation menu in mobile mode
-    if ($(".container-pf-nav-pf-vertical").hasClass("hidden-nav")) {
-      $(".nav-pf-vertical").removeClass("show-mobile-nav");
-    }
-  });
-  $(".drawer-pf-close").click(function() {
-    var $drawer = $(".drawer-pf");
-
-    $(".drawer-pf-trigger").removeClass("open");
-    $drawer.addClass("hide");
-  });
-  $(".drawer-pf-toggle-expand").click(function() {
-    var $drawer = $(".drawer-pf");
-    var $drawerNotifications = $drawer.find(".drawer-pf-notification");
-
-    if ($drawer.hasClass("drawer-pf-expanded")) {
-      $drawer.removeClass("drawer-pf-expanded");
-      $drawerNotifications.removeClass("expanded-notification");
-    } else {
-      $drawer.addClass("drawer-pf-expanded");
-      $drawerNotifications.addClass("expanded-notification");
-    }
+  // Reattach click handler to existing and the dynamically created list elements
+  $("span#saved-targets").on("click", ".list-group-item a", (event) => {
+    // Stop the bubbling effect of the click handler
+    event.stopPropagation();
+    // Prevent click on <a> from navigating to a new page
+    event.preventDefault();
+    // Remove the active class from any li.active
+    $(".nav-pf-vertical .list-group-item.active").removeClass("active");
+    // Find the closest li.list-group-item to the click and add the active class
+    let liClicked = $(event.target).closest("li.list-group-item");
+    // Store the email of the clicked target in a variable
+    let targetEmailAddress = liClicked.data("email");
+    // Add the active class to the clicked target
+    liClicked.addClass("active");
+    // Update the page with the clicked target's information
+    getSavedTartget(targetEmailAddress, renderPanels);
   });
 
-  // Mark All Read / Clear All
-  $(".panel-collapse").each(function(index, panel) {
-    var $panel = $(panel);
-    var unreadCount = $panel.find(".drawer-pf-notification.unread").length;
-    $(panel.parentElement)
-      .find(".panel-counter")
-      .text(unreadCount + " New Event" + (unreadCount !== 1 ? "s" : ""));
-
-    if ($(".drawer-pf .panel-collapse .unread").length === 0) {
-      // TODO: remove badge for unread indicator
-    }
-
-    $panel.on(
-      "click",
-      '.drawer-pf-action [data-toggle="mark-all-read"] .btn',
-      function() {
-        $panel.find(".unread").removeClass("unread");
-        $panel.find('.drawer-pf-action [data-toggle="mark-all-read"]').remove();
-        $(panel.parentElement)
-          .find(".panel-counter")
-          .text("0 New Events");
-        if ($(".drawer-pf .panel-collapse .unread").length === 0) {
-          $(".drawer-pf-trigger").removeClass("unread");
-        }
-      }
-    );
-    $panel.on(
-      "click",
-      '.drawer-pf-action [data-toggle="clear-all"] .btn',
-      function() {
-        $panel.find(".panel-body .drawer-pf-notification").remove();
-        $panel.find(".drawer-pf-action").remove();
-        $panel.find(".blank-slate-pf").removeClass("hidden");
-        $panel.find(".drawer-pf-loading").addClass("hidden");
-        $(panel.parentElement)
-          .find(".panel-counter")
-          .text("0 New Events");
-        if ($(".drawer-pf .panel-collapse .unread").length === 0) {
-          // TODO: remove badge for unread indicator
-        }
-      }
-    );
-
-    $panel.find(".drawer-pf-notification").each(function(index, notification) {
-      var $notification = $(notification);
-      $notification.on("click", ".drawer-pf-notification-content", function() {
-        $notification.removeClass("unread");
-        var unreadCount = $panel.find(".drawer-pf-notification.unread").length;
-        $(panel.parentElement)
-          .find(".panel-counter")
-          .text(unreadCount + " New Event" + (unreadCount !== 1 ? "s" : ""));
-        if (unreadCount === 0) {
-          $panel
-            .find('.drawer-pf-action [data-toggle="mark-all-read"]')
-            .remove();
-          if ($(".drawer-pf .panel-collapse .unread").length === 0) {
-            // TODO: remove badge for unread indicator
-          }
-        }
-      });
+  function getSavedTartget(targetEmail, render) {
+    $.get(`api/savedsearch/${targetEmail}`).done((targetResponse) => {
+      render(targetResponse);
     });
-  });
+  }
 
-  $("#notification-drawer-accordion").initCollapseHeights(".panel-body");
+  // Build the panel/card that contains the target and company information
+  function renderPanels(targetResponse) {
 
-  // matchHeight the contents of each .card-pf and then the .card-pf itself
-  $(".row-cards-pf > [class*='col'] > .card-pf .card-pf-title").matchHeight();
-  $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-body").matchHeight();
-  $(
-    ".row-cards-pf > [class*='col'] > .card-pf > .card-pf-footer"
-  ).matchHeight();
-  $(".row-cards-pf > [class*='col'] > .card-pf").matchHeight();
+    let targetHTML = ``;
+    let companyHTML = ``;
 
-  // Initialize the vertical navigation
-  $().setupVerticalNavigation(true);
+
+    // Build HTML block based on information available in target record
+    if (targetResponse.target.employmentTitle) {
+      targetHTML +=
+        `<a class="list-group-item"><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;${targetResponse.target.employmentTitle || "Job title not available"} | ${targetResponse.company.companyName || "Company not available"}
+        </a>`;
+    }
+    if (targetResponse.target.email) {
+      targetHTML +=
+        `<a href="mailto:${targetResponse.target.email}" class="list-group-item">
+          <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;${targetResponse.target.email}
+        </a>`;
+    }
+    if (targetResponse.target.linkedInURL) {
+      targetHTML +=
+        `<a href="${targetResponse.target.linkedInURL}" target="_blank" class="list-group-item" >
+          <i class="fa fa-linkedin-square" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;LinkedIn Profile
+        </a>`;
+    }
+    if (targetResponse.target.location) {
+      targetHTML +=
+        `<a class="list-group-item">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;${targetResponse.target.location}
+        </a>`;
+    }
+    if (targetResponse.target.twitterHandle) {
+      targetHTML +=
+        `<a href="https://www.twitter.com/${targetResponse.target.twitterHandle}" target="_blank" class="list-group-item" >
+            <i class="fa fa-twitter" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;@${targetResponse.target.twitterHandle}
+        </a>`;
+    }
+
+    // Build HTML block based on information available in company record
+    if (targetResponse.company.companyName) {
+      companyHTML +=
+        `<a class="list-group-item">${targetResponse.company.companyName}</a>`
+    }
+    if (targetResponse.company.companyFounded) {
+      companyHTML += `<a class="list-group-item">Est. ${targetResponse.company.companyFounded}</a>`
+    }
+    if (targetResponse.company.companyURL) {
+      companyHTML +=
+        `<a href="${targetResponse.company.companyURL}" target="_blank" class="list-group-item">
+          ${targetResponse.company.companyURL}</button>
+        </a>`
+    }
+
+    // Clear the currently selected target
+    $("#contact-area").html("");
+    // Update the page with a new target's information
+    $("#contact-area").html(`
+    <div class="col-xs-12 col-sm-8 col-md-8 fadeInUp">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+          <h3 class="panel-title" style="display:inline-block">${targetResponse.target.name}</h3>
+          <a href="#"><i class="glyphicon glyphicon-floppy-save pull-right"></i></a>
+				</div>
+				<div class="panel-body">
+          <div class="list-group">
+						${targetHTML}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-4 col-md-4 fadeInUp">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Company Information</h3>
+				</div>
+				<div class="panel-body">
+					<div class="list-group">						
+						${companyHTML}
+					</div>
+				</div>
+			</div>
+		</div>
+    `);
+  }
+
+  function loader() {
+    $("emailSearch").val("");
+    $("#contact-area").html("");
+    $("#contact-area").html(
+      `
+      <div class="loader">
+      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			 width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+				<rect x="0" y="0" width="4" height="10" fill="#0b6fc3">
+					<animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0" dur="0.6s"
+					 repeatCount="indefinite" />
+				</rect>
+				<rect x="10" y="0" width="4" height="10" fill="#0b6fc3">
+					<animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0.2s" dur="0.6s"
+					 repeatCount="indefinite" />
+				</rect>
+				<rect x="20" y="0" width="4" height="10" fill="#0b6fc3">
+					<animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0.4s" dur="0.6s"
+					 repeatCount="indefinite" />
+				</rect>
+      </svg>
+      </div>
+      `);
+  }
 });

@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if IE 9]><html lang="en-us" class="ie9 layout-pf layout-pf-fixed"><![endif]-->
-<!--[if gt IE 9]><!-->
 <html lang="en-us" class="layout-pf layout-pf-fixed">
-<!--<![endif]-->
 
 <head>
   <meta charset="utf-8">
@@ -10,40 +7,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>leadGenerator</title>
   <meta name="description" content="...">
-  <script src="http://www.patternfly.org/components/jquery/dist/jquery.min.js"></script>
-
-
+  {{#if login_page}}
+    {{> head/login }}
+  {{/if}}
   {{#if dashboard}}
-  <link rel="shortcut icon" href="http://www.patternfly.org/components/patternfly/dist/img/favicon.ico">
-  <link rel="stylesheet" href="http://www.patternfly.org/assets/css/patternfly-adjusted.min.css">
-  <link rel="stylesheet" href="http://www.patternfly.org/components/patternfly/dist/css/patternfly-additions.min.css">
-  <link rel="stylesheet" href="http://www.patternfly.org/assets/css/patternfly-site.min.css">
-  <script type="text/javascript">
-    window.IMAGE_PATH = "/assets/img"
-  </script>
-  <script src="http://www.patternfly.org/components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="http://www.patternfly.org/components/datatables/media/js/jquery.dataTables.js"></script>
-  <script src="http://www.patternfly.org/components/google-code-prettify/bin/prettify.min.js"></script>
-  <script src="http://www.patternfly.org/components/clipboard/dist/clipboard.min.js"></script>
-  <script src="http://www.patternfly.org/components/patternfly/dist/js/patternfly.min.js"></script>
-  <script src="http://www.patternfly.org/components/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/js/patternfly.min.js"></script>
-  <script src= "./js/dashboard.js"></script>
-   {{/if}}
- {{#if login_page}}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/login.css">
-{{/if}}
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    {{> head/dashboard }}
+  {{/if}}
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
 </head>
 
 <body class="cards-pf">
-
-   {{{body}}}
-
-  </body>
+  {{{body}}}
+</body>
