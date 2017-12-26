@@ -16,9 +16,12 @@ var models = require("../models");
 //API for saved emails search
 router.get("/api/savedsearch/:email", (req, res) => {
   savedEmail = req.params.email;
-
+  console.log("*".repeat(80));
+  console.log(`Saved Route Activated for ${savedEmail}`);
   //Find email related to target
   db.Target.findOne({ where: { email: savedEmail } }).then(targetData => {
+    console.log("*".repeat(80));
+    console.log(targetData);
     //Find the company the target works for
     db.Company.findOne({ where: { id: targetData.CompanyId } }).then(
       companyData => {

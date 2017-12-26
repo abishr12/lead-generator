@@ -1,23 +1,26 @@
-$(document).ready(function () {
+$(document).ready(function() {
   console.log("Dashboard JS loaded");
 
   // Capture user's ID number
   const userId = $("#Username").attr("data-user_id");
 
-  $("#searchform").on("submit", (event) => {
+  //Use Search for target and callback to solve the issue
 
+  $("#searchform").on("submit", event => {
     //Prevent normal browser behavior
     event.preventDefault();
 
     // Trim and store value entered by user in the search field
-    let emailInput = $("#emailSearch").val().trim();
+    let emailInput = $("#emailSearch")
+      .val()
+      .trim();
 
     let URL = `/api/search/${emailInput}/${userId}`;
 
     // Clear the email search field and display the loading icon.
-    loader()
+    loader();
 
-    $.get(URL).done((response) => {
+    $.get(URL).then(response => {
       // Convert the renderedPartial String to a jQuery object.
       let newTarget = $(response.renderedPartial);
 
@@ -26,16 +29,16 @@ $(document).ready(function () {
       // Adding an event listener to detect when the fadeInDown animation is complete
       // newTarget is an array. newTarget[0] is the <li> just created
       // This prevents the fadeInDown CSS animation from looping when the sidebar is opened and closed
-      newTarget[0].addEventListener("animationend", function () {
+      newTarget[0].addEventListener("animationend", function() {
         // When an arrow function is used, 'this' is the global object
-        $(this).removeClass('fadeInDown');
+        $(this).removeClass("fadeInDown");
       });
 
       //Add to the emails side bar with prepend()
       $("span#saved-targets").prepend(newTarget);
 
-      // Load the new target's information
-      getSavedTartget(emailInput, renderPanels);
+      //Display Information
+      renderPanels(response.data);
     });
   });
 
@@ -44,7 +47,7 @@ $(document).ready(function () {
   $("li.list-group-item").off("click");
 
   // Reattach click handler to existing and the dynamically created list elements
-  $("span#saved-targets").on("click", ".list-group-item a", (event) => {
+  $("span#saved-targets").on("click", ".list-group-item a", event => {
     // Stop the bubbling effect of the click handler
     event.stopPropagation();
     // Prevent click on <a> from navigating to a new page
@@ -62,62 +65,73 @@ $(document).ready(function () {
   });
 
   function getSavedTartget(targetEmail, render) {
-    $.get(`api/savedsearch/${targetEmail}`).done((targetResponse) => {
+    $.get(`api/savedsearch/${targetEmail}`).done(targetResponse => {
       render(targetResponse);
     });
   }
 
   // Build the panel/card that contains the target and company information
   function renderPanels(targetResponse) {
-
     let targetHTML = ``;
     let companyHTML = ``;
 
-
     // Build HTML block based on information available in target record
     if (targetResponse.target.employmentTitle) {
-      targetHTML +=
-        `<a class="list-group-item"><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;${targetResponse.target.employmentTitle || "Job title not available"} | ${targetResponse.company.companyName || "Company not available"}
+      targetHTML += `<a class="list-group-item"><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;${targetResponse
+        .target.employmentTitle || "Job title not available"} | ${targetResponse
+        .company.companyName || "Company not available"}
         </a>`;
     }
     if (targetResponse.target.email) {
-      targetHTML +=
-        `<a href="mailto:${targetResponse.target.email}" class="list-group-item">
-          <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;${targetResponse.target.email}
+      targetHTML += `<a href="mailto:${
+        targetResponse.target.email
+      }" class="list-group-item">
+          <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;${
+            targetResponse.target.email
+          }
         </a>`;
     }
     if (targetResponse.target.linkedInURL) {
-      targetHTML +=
-        `<a href="${targetResponse.target.linkedInURL}" target="_blank" class="list-group-item" >
+      targetHTML += `<a href="${
+        targetResponse.target.linkedInURL
+      }" target="_blank" class="list-group-item" >
           <i class="fa fa-linkedin-square" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;LinkedIn Profile
         </a>`;
     }
     if (targetResponse.target.location) {
-      targetHTML +=
-        `<a class="list-group-item">
-          <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;${targetResponse.target.location}
+      targetHTML += `<a class="list-group-item">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;${
+            targetResponse.target.location
+          }
         </a>`;
     }
     if (targetResponse.target.twitterHandle) {
-      targetHTML +=
-        `<a href="https://www.twitter.com/${targetResponse.target.twitterHandle}" target="_blank" class="list-group-item" >
-            <i class="fa fa-twitter" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;@${targetResponse.target.twitterHandle}
+      targetHTML += `<a href="https://www.twitter.com/${
+        targetResponse.target.twitterHandle
+      }" target="_blank" class="list-group-item" >
+            <i class="fa fa-twitter" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;@${
+              targetResponse.target.twitterHandle
+            }
         </a>`;
     }
 
     // Build HTML block based on information available in company record
     if (targetResponse.company.companyName) {
-      companyHTML +=
-        `<a class="list-group-item">${targetResponse.company.companyName}</a>`
+      companyHTML += `<a class="list-group-item">${
+        targetResponse.company.companyName
+      }</a>`;
     }
     if (targetResponse.company.companyFounded) {
-      companyHTML += `<a class="list-group-item">Est. ${targetResponse.company.companyFounded}</a>`
+      companyHTML += `<a class="list-group-item">Est. ${
+        targetResponse.company.companyFounded
+      }</a>`;
     }
     if (targetResponse.company.companyURL) {
-      companyHTML +=
-        `<a href="${targetResponse.company.companyURL}" target="_blank" class="list-group-item">
+      companyHTML += `<a href="${
+        targetResponse.company.companyURL
+      }" target="_blank" class="list-group-item">
           ${targetResponse.company.companyURL}</button>
-        </a>`
+        </a>`;
     }
 
     // Clear the currently selected target
@@ -127,7 +141,9 @@ $(document).ready(function () {
     <div class="col-xs-12 col-sm-8 col-md-8 fadeInUp">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-          <h3 class="panel-title" style="display:inline-block">${targetResponse.target.name}</h3>
+          <h3 class="panel-title" style="display:inline-block">${
+            targetResponse.target.name
+          }</h3>
           <a href="#"><i class="glyphicon glyphicon-floppy-save pull-right"></i></a>
 				</div>
 				<div class="panel-body">
@@ -143,7 +159,7 @@ $(document).ready(function () {
 					<h3 class="panel-title">Company Information</h3>
 				</div>
 				<div class="panel-body">
-					<div class="list-group">						
+					<div class="list-group">
 						${companyHTML}
 					</div>
 				</div>
@@ -174,6 +190,37 @@ $(document).ready(function () {
 				</rect>
       </svg>
       </div>
-      `);
+      `
+    );
+  }
+
+  function searchForTarget(userId, emaiInput, callback) {
+    //Prevent normal browser behavior
+
+    console.log("We're In");
+
+    let URL = `/api/search/${emailInput}/${userId}`;
+
+    // Clear the email search field and display the loading icon.
+    loader();
+
+    $.get(URL).then(response => {
+      // Convert the renderedPartial String to a jQuery object.
+      let newTarget = $(response.renderedPartial);
+
+      newTarget.addClass("fadeInDown");
+
+      // Adding an event listener to detect when the fadeInDown animation is complete
+      // newTarget is an array. newTarget[0] is the <li> just created
+      // This prevents the fadeInDown CSS animation from looping when the sidebar is opened and closed
+      newTarget[0].addEventListener("animationend", function() {
+        // When an arrow function is used, 'this' is the global object
+        $(this).removeClass("fadeInDown");
+      });
+
+      //Add to the emails side bar with prepend()
+      $("span#saved-targets").prepend(newTarget);
+      //callback();
+    });
   }
 });
