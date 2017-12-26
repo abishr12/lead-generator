@@ -6,44 +6,41 @@ $(document).ready(function() {
 
   //Use Search for target and callback to solve the issue
 
-  // $("#searchform").on("submit", event => {
-  //   //Prevent normal browser behavior
-  //   event.preventDefault();
-  //
-  //   // Trim and store value entered by user in the search field
-  //   let emailInput = $("#emailSearch")
-  //     .val()
-  //     .trim();
-  //
-  //   let URL = `/api/search/${emailInput}/${userId}`;
-  //
-  //   // Clear the email search field and display the loading icon.
-  //   loader();
-  //
-  //   $.get(URL)
-  //     .then(response => {
-  //       // Convert the renderedPartial String to a jQuery object.
-  //       let newTarget = $(response.renderedPartial);
-  //
-  //       newTarget.addClass("fadeInDown");
-  //
-  //       // Adding an event listener to detect when the fadeInDown animation is complete
-  //       // newTarget is an array. newTarget[0] is the <li> just created
-  //       // This prevents the fadeInDown CSS animation from looping when the sidebar is opened and closed
-  //       newTarget[0].addEventListener("animationend", function() {
-  //         // When an arrow function is used, 'this' is the global object
-  //         $(this).removeClass("fadeInDown");
-  //       });
-  //
-  //       //Add to the emails side bar with prepend()
-  //       $("span#saved-targets").prepend(newTarget);
-  //       return "Completed";
-  //     })
-  //     .done(response => {
-  //       console.log(response);
-  //       getSavedTartget(emailInput, renderPanels);
-  //     });
-  // });
+  $("#searchform").on("submit", event => {
+    //Prevent normal browser behavior
+    event.preventDefault();
+
+    // Trim and store value entered by user in the search field
+    let emailInput = $("#emailSearch")
+      .val()
+      .trim();
+
+    let URL = `/api/search/${emailInput}/${userId}`;
+
+    // Clear the email search field and display the loading icon.
+    loader();
+
+    $.get(URL).then(response => {
+      // Convert the renderedPartial String to a jQuery object.
+      let newTarget = $(response.renderedPartial);
+
+      newTarget.addClass("fadeInDown");
+
+      // Adding an event listener to detect when the fadeInDown animation is complete
+      // newTarget is an array. newTarget[0] is the <li> just created
+      // This prevents the fadeInDown CSS animation from looping when the sidebar is opened and closed
+      newTarget[0].addEventListener("animationend", function() {
+        // When an arrow function is used, 'this' is the global object
+        $(this).removeClass("fadeInDown");
+      });
+
+      //Add to the emails side bar with prepend()
+      $("span#saved-targets").prepend(newTarget);
+
+      //Display Information
+      renderPanels(response.data);
+    });
+  });
 
   // Remove patternfly.min.js behavior
   // Without this, the click handler below will silently fail and click on the contacts do not work
