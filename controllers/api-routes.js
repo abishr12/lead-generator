@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var clearbitSearch = require("../utils/clearbit-search");
 var tableCreate = require("../utils/table-create");
-var validateEmail = require("../utils/validate-Email");
+//var validateEmail = require("../utils/validate-Email");
 const hbs = require("handlebars");
 var db = require("../models/index.js");
 
@@ -53,30 +53,27 @@ router.get("/api/search/:email/:userId", (req, res) => {
   userId = req.params.userId;
 
   // Validate email is actually an email, otherwise throw an error
-  if (validateEmail(emailSearch)) {
-    clearbitSearch(emailSearch, function(data) {
-      tableCreate(data, userId);
 
-      let loadedPartial = hbs.partials["sidebar-element"];
-      if (!loadedPartial) {
-        return res.status(404).json({
-          error: "Snippet not found."
-        });
-      }
+  clearbitSearch(emailSearch, function(data) {
+    tableCreate(data, userId);
 
-      // /** Render the partial. */
-      let renderedPartial = loadedPartial(data.target);
+    let loadedPartial = hbs.partials["sidebar-element"];
+    if (!loadedPartial) {
+      return res.status(404).json({
+        error: "Snippet not found."
+      });
+    }
 
-      let responseObject = {
-        data: data,
-        renderedPartial: renderedPartial
-      };
+    // /** Render the partial. */
+    let renderedPartial = loadedPartial(data.target);
 
-      res.json(responseObject);
-    });
-  } else {
-    throw Error("Invalid Email");
-  }
+    let responseObject = {
+      data: data,
+      renderedPartial: renderedPartial
+    };
+
+    res.json(responseObject);
+  });
 });
 
 //Save the email to be searched stored in the database
