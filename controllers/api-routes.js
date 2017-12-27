@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var clearbitSearch = require("../utils/clearbit-search");
 var tableCreate = require("../utils/table-create");
-//var validateEmail = require("../utils/validate-Email");
+const emailExists = require("../utils/email-exists");
 const hbs = require("handlebars");
 var db = require("../models/index.js");
 
@@ -16,12 +16,8 @@ var models = require("../models");
 //API for saved emails search
 router.get("/api/savedsearch/:email", (req, res) => {
   savedEmail = req.params.email;
-  console.log("*".repeat(80));
-  console.log(`Saved Route Activated for ${savedEmail}`);
   //Find email related to target
   db.Target.findOne({ where: { email: savedEmail } }).then(targetData => {
-    console.log("*".repeat(80));
-    console.log(targetData);
     //Find the company the target works for
     db.Company.findOne({ where: { id: targetData.CompanyId } }).then(
       companyData => {
@@ -53,26 +49,34 @@ router.get("/api/search/:email/:userId", (req, res) => {
   userId = req.params.userId;
 
   // Validate email is actually an email, otherwise throw an error
+  emailExists(emailSearch, userId).done(emailExisting => {
+    if (emailExisting) {
+      res.send("Email Already Exists");
+    } else {
+      clearbitSearch(emailSearch, function(data) {
+        console.log("*".repeat(40));
+        console.log(data);
 
-  clearbitSearch(emailSearch, function(data) {
-    tableCreate(data, userId);
+        tableCreate(data, userId);
 
-    let loadedPartial = hbs.partials["sidebar-element"];
-    if (!loadedPartial) {
-      return res.status(404).json({
-        error: "Snippet not found."
+        let loadedPartial = hbs.partials["sidebar-element"];
+        if (!loadedPartial) {
+          return res.status(404).json({
+            error: "Snippet not found."
+          });
+        }
+
+        // /** Render the partial. */
+        let renderedPartial = loadedPartial(data.target);
+
+        let responseObject = {
+          data: data,
+          renderedPartial: renderedPartial
+        };
+
+        res.json(responseObject);
       });
     }
-
-    // /** Render the partial. */
-    let renderedPartial = loadedPartial(data.target);
-
-    let responseObject = {
-      data: data,
-      renderedPartial: renderedPartial
-    };
-
-    res.json(responseObject);
   });
 });
 

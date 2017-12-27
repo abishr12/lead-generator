@@ -17,28 +17,32 @@ $(document).ready(function() {
 
     let URL = `/api/search/${emailInput}/${userId}`;
 
-    // Clear the email search field and display the loading icon.
-    loader();
+    $.get(URL).done(response => {
+      if (response == "Email Already Exists") {
+        $("#warningModal").modal("show");
+      } else {
+        // Clear the email search field and display the loading icon.
+        loader();
 
-    $.get(URL).then(response => {
-      // Convert the renderedPartial String to a jQuery object.
-      let newTarget = $(response.renderedPartial);
+        // Convert the renderedPartial String to a jQuery object.
+        let newTarget = $(response.renderedPartial);
 
-      newTarget.addClass("fadeInDown");
+        newTarget.addClass("fadeInDown");
 
-      // Adding an event listener to detect when the fadeInDown animation is complete
-      // newTarget is an array. newTarget[0] is the <li> just created
-      // This prevents the fadeInDown CSS animation from looping when the sidebar is opened and closed
-      newTarget[0].addEventListener("animationend", function() {
-        // When an arrow function is used, 'this' is the global object
-        $(this).removeClass("fadeInDown");
-      });
+        // Adding an event listener to detect when the fadeInDown animation is complete
+        // newTarget is an array. newTarget[0] is the <li> just created
+        // This prevents the fadeInDown CSS animation from looping when the sidebar is opened and closed
+        newTarget[0].addEventListener("animationend", function() {
+          // When an arrow function is used, 'this' is the global object
+          $(this).removeClass("fadeInDown");
+        });
 
-      //Add to the emails side bar with prepend()
-      $("span#saved-targets").prepend(newTarget);
+        //Add to the emails side bar with prepend()
+        $("span#saved-targets").prepend(newTarget);
 
-      //Display Information
-      renderPanels(response.data);
+        // Load the new target's information
+        renderPanels(response.data);
+      }
     });
   });
 
