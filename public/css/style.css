@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto|Source+Sans+Pro');
+@import url("https://fonts.googleapis.com/css?family=Roboto|Source+Sans+Pro");
 @keyframes fadeInDown {
   from {
     opacity: 0;
@@ -24,16 +24,16 @@
 }
 
 .fadeInDown {
-  animation: .4s 1 fadeInDown;
+  animation: 0.4s 1 fadeInDown;
 }
 
 .fadeInUp {
-  animation: .7s 1 fadeInUp;
+  animation: 0.7s 1 fadeInUp;
 }
 
 body.cards-pf {
   background-color: #fff;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 .navbar-inverse {
@@ -58,7 +58,7 @@ div.row-contact-search input[type="email"] {
   padding: 2px 16px;
   height: 60px;
   font-size: 32px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 div.row-contact-search button[type="submit"] {
@@ -90,7 +90,7 @@ nav img#logo {
   height: 24px;
 }
 
-.nav-pf-vertical .list-group-item.active>a {
+.nav-pf-vertical .list-group-item.active > a {
   background-color: #0b6fc3;
 }
 
@@ -102,7 +102,7 @@ i.fa.fa-power-off {
   display: inline !important;
 }
 
-div.panel-primary>.panel-heading {
+div.panel-primary > .panel-heading {
   background-color: #0b6fc3;
   border-color: #0b6fc3;
 }
@@ -125,6 +125,9 @@ div.panel-heading i.glyphicon-floppy-save {
   font-size: 24px;
 }
 
+#close-button:hover {
+  background-color: red;
+}
 
 /* ul {
   list-style: none;
@@ -141,3 +144,4 @@ li:before {
   padding-right: 8px;
   color: blue;
 } */
+
