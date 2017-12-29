@@ -54,8 +54,10 @@ router.get("/api/search/:email/:userId", (req, res) => {
       res.send("Email Already Exists");
     } else {
       clearbitSearch(emailSearch, function(data) {
+        if (data === null) {
+          res.send("Email Not Found");
+        }
         console.log("*".repeat(40));
-        console.log(data);
 
         tableCreate(data, userId);
 

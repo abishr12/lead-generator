@@ -18,7 +18,9 @@ $(document).ready(function() {
     let URL = `/api/search/${emailInput}/${userId}`;
 
     $.get(URL).done(response => {
-      if (response == "Email Already Exists") {
+      console.log("Response ---> " + response);
+      if (typeof response != "object") {
+        $("#warningMessage").text(response);
         $("#warningModal").modal("show");
       } else {
         // Clear the email search field and display the loading icon.
