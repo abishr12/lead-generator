@@ -70,6 +70,12 @@ $(document).ready(function() {
     getSavedTartget(targetEmailAddress, renderPanels);
   });
 
+
+  // Function that binds click event handlers to save butotns on dynamically created panels
+  $("div#contact-area").on("click", "a.save", event => {
+    console.log(event);
+  });
+
   function getSavedTartget(targetEmail, render) {
     $.get(`api/savedsearch/${targetEmail}`).done(targetResponse => {
       render(targetResponse);
@@ -150,7 +156,7 @@ $(document).ready(function() {
           <h3 class="panel-title" style="display:inline-block">${
             targetResponse.target.name
           }</h3>
-          <a href="#"><i class="glyphicon glyphicon-floppy-save pull-right"></i></a>
+          <a href="#" class="save"><i class="glyphicon glyphicon-floppy-save pull-right"></i></a>
 				</div>
 				<div class="panel-body">
           <div class="list-group">
