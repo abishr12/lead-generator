@@ -33,7 +33,7 @@ var clearbitSearch = (emailsToSearch, callback) => {
         //Company Information
         workingFor.companyName = company.name;
         workingFor.companyFounded = company.foundedYear;
-        workingFor.companyURL = "http://www." + company.domain;
+        workingFor.companyURL = "https://www." + company.domain;
         workingFor.companyBio = company.site.metaDescription;
         workingFor.companyEmails = company.site.emailAddresses;
         workingFor.companyPhone = company.phone;
