@@ -105,7 +105,7 @@ $(document).ready(function() {
     if (targetResponse.target.linkedInURL) {
       targetHTML += `<a href= ${
         targetResponse.target.linkedInURL
-      }" target="_blank" class="list-group-item" >
+      } target="_blank" class="list-group-item" >
           <i class="fa fa-linkedin-square" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;LinkedIn Profile
         </a>`;
     }
