@@ -70,7 +70,6 @@ $(document).ready(function() {
     getSavedTartget(targetEmailAddress, renderPanels);
   });
 
-
   // Function that binds click event handlers to save butotns on dynamically created panels
   $("div#contact-area").on("click", "a.save", event => {
     console.log(event);
@@ -104,7 +103,7 @@ $(document).ready(function() {
         </a>`;
     }
     if (targetResponse.target.linkedInURL) {
-      targetHTML += `<a href="${
+      targetHTML += `<a href="https://${
         targetResponse.target.linkedInURL
       }" target="_blank" class="list-group-item" >
           <i class="fa fa-linkedin-square" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;LinkedIn Profile
@@ -206,3 +205,4 @@ $(document).ready(function() {
     );
   }
 });
+
