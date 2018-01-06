@@ -23,7 +23,8 @@ var clearbitSearch = (emailsToSearch, callback) => {
         person.email = target.email;
         person.employmentCompany = target.employment.name;
         person.employmentTitle = target.employment.title;
-        person.linkedInURL = "https:www.linkedin.com/" + target.linkedin.handle;
+        person.linkedInURL =
+          "https://www.linkedin.com/" + target.linkedin.handle;
 
         person.twitterHandle = target.twitter.handle;
         person.location = target.location;
