@@ -2,14 +2,15 @@
 [![dependencies Status](https://david-dm.org/abishr12/lead-generator/status.svg)](https://david-dm.org/abishr12/lead-generator)
 
 ### Table of Contents
+
 [app.listen](#applisten)<br>
 [Environment Variables](#environment-variables)<br>
 [User Authentication](#user-authentication)<br>
-  * [Passport.js](#passportjs)
-  * [Controller](#auth-controller)
-  * [Routes](#auth-routes)
-  * [Views](#auth-views)
-  * [User Model](#user-model)
+&nbsp;&nbsp;&nbsp;&nbsp;[Passport.js](#passportjs)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[Controller](#auth-controller)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[Routes](#auth-routes)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[Views](#auth-views)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[User Model](#user-model)<br>
 
 ### app.listen
 
