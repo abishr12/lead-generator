@@ -41,11 +41,11 @@ The `dotenv` is used to reference private data through the server's environment 
 
 #### Passport.js
 
-The app utilizes the [Passport.js](http://www.passportjs.org/) library to handle user authentication. The Passport [config](https://github.com/abishr12/lead-generator/blob/auth/config/passport/passport.js) directory contains the [logic for creating new users](https://github.com/abishr12/lead-generator/blob/b9406a17ebca1043b0f033f96c756a20eaa444f4/config/passport/passport.js#L9), [encrypting passwords](https://github.com/abishr12/lead-generator/blob/b9406a17ebca1043b0f033f96c756a20eaa444f4/config/passport/passport.js#L19) using the [bcrypt](https://www.npmjs.com/package/bcrypt) package, [signing in existing users](https://github.com/abishr12/lead-generator/blob/b9406a17ebca1043b0f033f96c756a20eaa444f4/config/passport/passport.js#L54) and validating passwords, also using bcrypt.
+The app utilizes the [Passport.js](http://www.passportjs.org/) library to handle user authentication. The Passport [config](https://github.com/abishr12/lead-generator/blob/master/config/passport/passport.js) directory contains the [logic for creating new users](https://github.com/abishr12/lead-generator/blob/b9406a17ebca1043b0f033f96c756a20eaa444f4/config/passport/passport.js#L9), [encrypting passwords](https://github.com/abishr12/lead-generator/blob/b9406a17ebca1043b0f033f96c756a20eaa444f4/config/passport/passport.js#L19) using the [bcrypt](https://www.npmjs.com/package/bcrypt) package, [signing in existing users](https://github.com/abishr12/lead-generator/blob/b9406a17ebca1043b0f033f96c756a20eaa444f4/config/passport/passport.js#L54) and validating passwords, also using bcrypt.
 
 #### Auth Controller
 
-The [./controllers/authctrl](https://github.com/abishr12/lead-generator/blob/auth/controllers/authctrl.js) file is a set of methods that are exported to handle sign-up, sign-in, detecting if a user is signed-in, and logout.
+The [./controllers/authctrl](https://github.com/abishr12/lead-generator/blob/master/controllers/authctrl.js) file is a set of methods that are exported to handle sign-up, sign-in, detecting if a user is signed-in, and logout.
 
 #### Auth Routes
 
@@ -66,4 +66,4 @@ The app uses Handlebars for the dashboard, sign-up and sign-in.
 
 #### User Model
 
-Added [User model](https://github.com/abishr12/lead-generator/blob/auth/models/users.js) to handle logic for creating and signing in users. The User model contains an ID (primary key), first and last name, email (the username), password, last login, and logged in/out status. This data is saved in a `users` table in the `lead_generator` database.
+The [User model](https://github.com/abishr12/lead-generator/blob/master/models/users.js) holds the logic for creating and signing in users. The User model contains an `ID` (primary key), `first` and `last` name, `email` (the username), `password`, `last login`, and session `status`. This data is saved and persisted in the `lead_generator` database.
