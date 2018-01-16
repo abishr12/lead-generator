@@ -4,7 +4,12 @@
 ### Table of Contents
 [app.listen](#applisten)<br>
 [Environment Variables](#environment-variables)<br>
-[Passport](#passportjs)<br>
+[User Authentication](#user-authentication)<br>
+  * [Passport.js](#passportjs)
+  * [Controller](#auth-controller)
+  * [Routes](#auth-routes)
+  * [Views](#auth-views)
+  * [User Model](#user-model)
 
 ### app.listen
 
