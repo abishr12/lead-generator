@@ -1,32 +1,20 @@
 # Lead Generator
+[![dependencies Status](https://david-dm.org/abishr12/lead-generator/status.svg)](https://david-dm.org/abishr12/lead-generator)
 
-### App Dependencies
+### Table of Contents
 
-Here is the dependency list with the modules the needed for user auth.
+[app.listen](#applisten)<br>
+[Environment Variables](#environment-variables)<br>
+[User Authentication](#user-authentication)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[Passport.js](#passportjs)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[Controller](#auth-controller)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[Routes](#auth-routes)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[Views](#auth-views)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[User Model](#user-model)<br>
 
-```json
-"dependencies": {
-    "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.18.2",
-    "clearbit": "^1.3.3",
-    "dotenv": "^4.0.0",
-    "express": "^4.16.2",
-    "express-handlebars": "^3.0.0",
-    "method-override": "^2.3.10",
-    "mysql": "^2.15.0",
-    "mysql2": "^1.5.1",
-    "nodemon": "^1.12.1",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0",
-    "sequelize": "^4.23.4"
-  }
-```
+### app.listen
 
-### Changes made to the app
-
-#### app.listen
-
-When `server.js` is launched, it checks to make sure everything with the db is ok, then kicks off `app.listen`. If not, it catches any errors and logs them to the terminal.
+When `server.js` is run, it checks to make sure the database is capable of running without errors, then calls `app.listen`. The server will not start if any errors are caught. The process will terminate and the errors will be logged to the console.
 
 ```javascript
 models.sequelize.sync().then(function () {
@@ -45,40 +33,37 @@ models.sequelize.sync().then(function () {
 });
 ```
 
-#### .env file
+### Environment Variables
 
-If it's cool with you, I'd like to move all of the secret keys and DB info to a .env file. We can use the [dotenv](https://www.npmjs.com/package/dotenv) package. `dotenv` will allow us to reference private data  through the servers environment (`process.env`) rather than a `keys.js` file. I am not using it yet, but you can see that I am requiring the package at the top of [server.js](https://github.com/abishr12/lead-generator/blob/b9406a17ebca1043b0f033f96c756a20eaa444f4/server.js#L1).
+The `dotenv` is used to reference private data through the server's environment (`process.env`).
 
 ### User Authentication
 
 #### Passport.js
 
-[Passport.js](http://www.passportjs.org/) is the library I chose to handle user authentication. In the [config](https://github.com/abishr12/lead-generator/blob/auth/config/passport/passport.js) directory, you will find a file named `passport/passport.js` which holds the [logic for creating new users](https://github.com/abishr12/lead-generator/blob/b9406a17ebca1043b0f033f96c756a20eaa444f4/config/passport/passport.js#L9), [encrypting their passwords](https://github.com/abishr12/lead-generator/blob/b9406a17ebca1043b0f033f96c756a20eaa444f4/config/passport/passport.js#L19) using the [bcrypt](https://www.npmjs.com/package/bcrypt) package, [signing in existing users](https://github.com/abishr12/lead-generator/blob/b9406a17ebca1043b0f033f96c756a20eaa444f4/config/passport/passport.js#L54) and validating passwords, also using bcrypt.
-
-
-#### User Model
-
-Added [User model](https://github.com/abishr12/lead-generator/blob/auth/models/users.js) to handle logic for creating and signing in users. The User model contains an ID (primary key), first and last name, email (the username), password, last login, and logged in/out status. This data is saved in a `users` table in the `lead_generator` database.
+The app utilizes the [Passport.js](http://www.passportjs.org/) library to handle user authentication. The Passport [config](https://github.com/abishr12/lead-generator/blob/master/config/passport/passport.js) directory contains the [logic for creating new users](https://github.com/abishr12/lead-generator/blob/b9406a17ebca1043b0f033f96c756a20eaa444f4/config/passport/passport.js#L9), [encrypting passwords](https://github.com/abishr12/lead-generator/blob/b9406a17ebca1043b0f033f96c756a20eaa444f4/config/passport/passport.js#L19) using the [bcrypt](https://www.npmjs.com/package/bcrypt) package, [signing in existing users](https://github.com/abishr12/lead-generator/blob/b9406a17ebca1043b0f033f96c756a20eaa444f4/config/passport/passport.js#L54) and validating passwords, also using bcrypt.
 
 #### Auth Controller
 
-The [./controllers/authctrl](https://github.com/abishr12/lead-generator/blob/auth/controllers/authctrl.js) file is basically a set of methods that are exported to handle sign-up, sign-in, detecting if a user is signed-in, and logout.
+The [./controllers/authctrl](https://github.com/abishr12/lead-generator/blob/master/controllers/authctrl.js) file is a set of methods that are exported to handle sign-up, sign-in, detecting if a user is signed-in, and logout.
 
 #### Auth Routes
 
-The `routes` module now requires the following modules: 
+In order to run, the `routes` module requires the following modules: 
 
 ```javascript
-// Require auth controller and passport.js module
+// Provide access to the Passport module
 const authctrl = require('../controllers/authctrl.js');
 const passport = require('passport');
 
-// Requre models to have access to User moddle
+// Provide access to the User moddle
 var models = require("../models");
 ```
 
 #### Auth Views
 
-Added handlebar views for dashboard, sign-up and sign-in. Dashboard will be deleted. The main UI will replace the dashboard view/route.
+The app uses Handlebars for the dashboard, sign-up and sign-in.
 
-Sign-in and sign-up forms are super simple (no css).
+#### User Model
+
+The [User model](https://github.com/abishr12/lead-generator/blob/master/models/users.js) holds the logic for creating and signing in users. The User model contains an `ID` (primary key), `first` and `last` name, `email` (the username), `password`, `last login`, and session `status`. This data is saved and persisted in the `lead_generator` database.
