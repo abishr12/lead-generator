@@ -10,6 +10,9 @@ $(document).ready(function() {
     //Prevent normal browser behavior
     event.preventDefault();
 
+    // Clear the email search field and display the loading icon.
+    loader();
+
     // Trim and store value entered by user in the search field
     let emailInput = $("#emailSearch")
       .val()
@@ -23,9 +26,6 @@ $(document).ready(function() {
         $("#warningMessage").text(response);
         $("#warningModal").modal("show");
       } else {
-        // Clear the email search field and display the loading icon.
-        loader();
-
         // Convert the renderedPartial String to a jQuery object.
         let newTarget = $(response.renderedPartial);
 
@@ -58,6 +58,8 @@ $(document).ready(function() {
     event.stopPropagation();
     // Prevent click on <a> from navigating to a new page
     event.preventDefault();
+    // Clear the email search field and display the loading icon.
+    loader();
     // Remove the active class from any li.active
     $(".nav-pf-vertical .list-group-item.active").removeClass("active");
     // Find the closest li.list-group-item to the click and add the active class
@@ -182,6 +184,7 @@ $(document).ready(function() {
   function loader() {
     $("emailSearch").val("");
     $("#contact-area").html("");
+    console.log("Hello");
     $("#contact-area").html(
       `
       <div class="loader">
